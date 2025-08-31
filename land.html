@@ -1,0 +1,4140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForgeItOps - Premium IT Solutions for Web, AI, and Cloud</title>
+    <meta name="description" content="Enterprise-grade DevOps solutions, AI-powered chatbots, and modern website creation. Transform your business with ForgeItOps.">
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient-start: #7C4DFF;
+            --primary-gradient-end: #9575CD;
+            --electric-blue: #2196F3;
+            --emerald-green: #00C896;
+            --dark-base: #0D0D0D;
+            --light-base: #F5F7FA;
+            --heading-dark: #212121;
+            --body-text: #444444;
+            --white: #FFFFFF;
+            --neon-aqua: #2EE6D6;
+            --soft-gold: #C8A951;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--dark-base);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-base);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--glass-border);
+            border-top: 3px solid var(--primary-gradient-start);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-aqua);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--neon-aqua));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 77, 255, 0.5);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* Hero Section with Advanced Animations */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(ellipse at top, rgba(124, 77, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom right, rgba(46, 230, 214, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom left, rgba(33, 150, 243, 0.1) 0%, transparent 50%);
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-gradient-start);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float-particle 20s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--primary-gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--neon-aqua));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(124, 77, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(124, 77, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(124, 77, 255, 0.1);
+            border-color: var(--primary-gradient-start);
+            transform: translateY(-3px);
+        }
+
+        /* Animated Chatbot Demo in Hero */
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .chatbot-showcase {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .showcase-window {
+            background: rgba(13, 13, 13, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-window:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .showcase-header {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .showcase-messages {
+            padding: 24px;
+            height: 450px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .demo-message {
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideInMessage 0.5s ease forwards;
+        }
+
+        .demo-message:nth-child(1) { animation-delay: 1s; }
+        .demo-message:nth-child(2) { animation-delay: 2s; }
+        .demo-message:nth-child(3) { animation-delay: 3s; }
+        .demo-message:nth-child(4) { animation-delay: 4s; }
+        .demo-message:nth-child(5) { animation-delay: 5s; }
+        .demo-message:nth-child(6) { animation-delay: 6s; }
+
+        @keyframes slideInMessage {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .demo-bubble {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 12px 16px;
+            border-radius: 16px;
+            max-width: 80%;
+            display: inline-block;
+        }
+
+        .demo-message.user {
+            text-align: right;
+        }
+
+        .demo-message.user .demo-bubble {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            border: none;
+            color: white;
+        }
+
+        .demo-image {
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 8px;
+        }
+
+        .demo-link {
+            color: var(--neon-aqua);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .demo-link:hover {
+            color: var(--electric-blue);
+            text-decoration: underline;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .demo-button {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 77, 255, 0.4);
+        }
+
+        /* Floating Elements */
+        .floating-badge {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 16px 24px;
+            animation: floatAdvanced 4s ease-in-out infinite;
+        }
+
+        .badge-1 {
+            top: 20%;
+            right: -50px;
+            animation-delay: 0s;
+        }
+
+        .badge-2 {
+            bottom: 30%;
+            left: -50px;
+            animation-delay: 1s;
+        }
+
+        .badge-3 {
+            top: 50%;
+            right: -80px;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatAdvanced {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+            25% { 
+                transform: translateY(-20px) translateX(10px) rotate(2deg);
+            }
+            75% { 
+                transform: translateY(20px) translateX(-10px) rotate(-2deg);
+            }
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: var(--light-base);
+            color: var(--heading-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(124, 77, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--heading-dark);
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--body-text);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--heading-dark);
+        }
+
+        .about-text p {
+            color: var(--body-text);
+            margin-bottom: 32px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--neon-aqua));
+            transition: left 0.3s ease;
+        }
+
+        .value-card:hover::before {
+            left: 0;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(124, 77, 255, 0.2);
+        }
+
+        .value-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .team-illustration {
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-illustration::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(124, 77, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Chatbot Technology Section */
+        .chatbot-section {
+            padding: 120px 0;
+            background: var(--dark-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chatbot-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-gradient-start), transparent);
+        }
+
+        .chatbot-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: start;
+            padding: 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124, 77, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-item:hover::before {
+            left: 100%;
+        }
+
+        .feature-item:hover {
+            background: rgba(124, 77, 255, 0.1);
+            transform: translateX(10px);
+            border-color: var(--primary-gradient-start);
+        }
+
+        .feature-icon {
+            min-width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .feature-text h4 {
+            color: var(--white);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .feature-text p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .chatbot-demo {
+            position: relative;
+        }
+
+        .chat-widget-preview {
+            background: rgba(13, 13, 13, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            transform: perspective(1000px) rotateY(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .chat-widget-preview:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 0;
+            background: var(--light-base);
+            color: var(--heading-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--neon-aqua));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(124, 77, 255, 0.3);
+        }
+
+        .service-header {
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(124, 77, 255, 0.05), rgba(46, 230, 214, 0.05));
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .service-content {
+            padding: 32px;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--heading-dark);
+        }
+
+        .service-content p {
+            color: var(--body-text);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .service-logs {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+
+        .log-line {
+            margin: 4px 0;
+            opacity: 0.9;
+        }
+
+        .log-success { color: #00ff00; }
+        .log-info { color: #2EE6D6; }
+        .log-warning { color: #ffbd2e; }
+
+        /* Why ForgeItOps Section */
+        .why-section {
+            padding: 120px 0;
+            background: var(--dark-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 77, 255, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse-bg 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 32px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(124, 77, 255, 0.1);
+            border-color: var(--primary-gradient-start);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--neon-aqua));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        .dashboard-preview {
+            margin-top: 60px;
+            background: rgba(13, 13, 13, 0.8);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .dashboard-title {
+            color: var(--white);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: var(--glass-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            color: var(--neon-aqua);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Use Cases Section */
+        .use-cases {
+            padding: 120px 0;
+            background: var(--light-base);
+            color: var(--heading-dark);
+        }
+
+        .use-cases-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            color: var(--body-text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: white;
+            border-color: transparent;
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: var(--primary-gradient-start);
+            color: var(--primary-gradient-start);
+        }
+
+        .use-case-content {
+            margin-top: 60px;
+            display: none;
+        }
+
+        .use-case-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .use-case-text h3 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--heading-dark);
+        }
+
+        .use-case-text p {
+            color: var(--body-text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .use-case-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .use-case-list li {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--body-text);
+        }
+
+        .use-case-visual {
+            position: relative;
+        }
+
+        .infra-diagram {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 120px 0;
+            background: var(--dark-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(124, 77, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-gradient-start);
+            background: rgba(124, 77, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(124, 77, 255, 0.2);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 32px;
+            font-size: 60px;
+            color: var(--primary-gradient-start);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .testimonial-content {
+            margin-bottom: 24px;
+            padding-top: 20px;
+        }
+
+        .testimonial-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 24px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            margin-left: auto;
+            color: var(--soft-gold);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--light-base) 0%, rgba(124, 77, 255, 0.05) 100%);
+            color: var(--heading-dark);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--heading-dark);
+        }
+
+        .contact-info p {
+            color: var(--body-text);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .contact-text h4 {
+            color: var(--heading-dark);
+            margin-bottom: 4px;
+        }
+
+        .contact-text p {
+            color: var(--body-text);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 48px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--heading-dark);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--heading-dark);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-gradient-start);
+            box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-base);
+            padding: 60px 0 40px;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-aqua);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end));
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid var(--glass-border);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Ultra Premium Chatbot Widget Styles */
+            .chatbot-widget {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+    }
+
+
+        .chatbot-toggle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+            box-shadow: 0 5px 25px rgba(124, 77, 255, 0.4),
+                        0 0 0 0 rgba(124, 77, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: pulse-glow 2s infinite;
+            position: relative;
+            overflow: visible;
+        }
+
+        .chatbot-toggle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 5px 25px rgba(124, 77, 255, 0.4),
+                            0 0 0 0 rgba(124, 77, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 5px 35px rgba(124, 77, 255, 0.6),
+                            0 0 0 15px rgba(124, 77, 255, 0);
+            }
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 35px rgba(124, 77, 255, 0.6);
+        }
+
+        .bot-avatar-toggle {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .bot-avatar-toggle svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #FF5252, #FF1744);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: white;
+            font-weight: bold;
+            animation: bounce 1s infinite;
+            box-shadow: 0 2px 8px rgba(255, 23, 68, 0.4);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Attention Grabbing Animations for Chatbot Widget */
+        .welcome-notification {
+                position: fixed;
+        bottom: 110px;
+        right: 30px;
+        background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(124, 77, 255, 0.5);
+        font-weight: 600;
+        font-size: 14px;
+        white-space: nowrap;
+        z-index: 9998;
+        cursor: pointer;
+        display: none;
+        animation: slideInNotification 0.5s ease forwards;
+        }
+
+        .welcome-notification::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 35px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #2EE6D6;
+        }
+
+        .welcome-notification.show {
+            display: block;
+        }
+
+        @keyframes slideInNotification {
+       from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Typing bubble animation */
+        .typing-bubble {
+            position: absolute;
+            bottom: 100px;
+            right: 10px;
+            background: white;
+            padding: 12px 18px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 8px;
+            animation: bubblePop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+        }
+
+        .typing-bubble.show {
+            display: flex;
+        }
+
+        .typing-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+
+        @keyframes bubblePop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            80% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot-bubble {
+            width: 8px;
+            height: 8px;
+            background: #7C4DFF;
+            border-radius: 50%;
+            animation: typingBubble 1.4s infinite;
+        }
+
+        .typing-dot-bubble:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot-bubble:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingBubble {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Enhanced pulse animation for first-time visitors */
+           .chatbot-toggle.attention-pulse {
+        animation: attentionPulse 2s infinite;
+    }
+
+        @keyframes attentionPulse {
+            0% {
+                box-shadow: 0 5px 25px rgba(124, 77, 255, 0.4),
+                            0 0 0 0 rgba(124, 77, 255, 0.7);
+            }
+            50% {
+                box-shadow: 0 5px 35px rgba(124, 77, 255, 0.6),
+                            0 0 0 20px rgba(124, 77, 255, 0);
+            }
+            100% {
+                box-shadow: 0 5px 25px rgba(124, 77, 255, 0.4),
+                            0 0 0 0 rgba(124, 77, 255, 0);
+            }
+        }
+
+            @keyframes shake {
+        0%, 90%, 100% {
+            transform: rotate(0deg) scale(1);
+        }
+        92%, 96% {
+            transform: rotate(-8deg) scale(1.05);
+        }
+        94%, 98% {
+            transform: rotate(8deg) scale(1.05);
+        }
+    }
+        /* Wave hand animation */
+        .wave-hand {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 30px;
+            animation: waveAnimation 1s ease-in-out 3;
+            transform-origin: 70% 70%;
+        }
+
+        @keyframes waveAnimation {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+    .chatbot-toggle.shake-animation {
+        animation: shake 2s ease-in-out infinite;
+    }
+
+
+        /* Spotlight effect */
+            .spotlight {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(124, 77, 255, 0.4) 0%, transparent 60%);
+        pointer-events: none;
+        z-index: -2;
+        animation: spotlightPulse 3s ease-in-out infinite;
+        display: none;
+    }
+        .spotlight.show {
+            display: block;
+        }
+
+        @keyframes spotlightPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 1;
+            }
+        }
+
+        /* New user hint arrow */
+        .hint-arrow {
+            position: absolute;
+            top: -70px;
+            right: 15px;
+            width: 50px;
+            height: 50px;
+                    z-index: 10;
+        animation: arrowBounce 2s ease-in-out infinite;
+        filter: drop-shadow(0 4px 10px rgba(124, 77, 255, 0.5));
+        }
+
+        .hint-arrow svg {
+            width: 100%;
+            height: 100%;
+            fill: #7C4DFF;
+                    transform: rotate(180deg);
+
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(15px);
+            }
+        }
+
+        @keyframes fadeInArrow {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Glowing text label */
+            .click-me-label {
+        position: absolute;
+        top: -40px;
+        right: -20px;
+        background: linear-gradient(135deg, #FF5252, #FF1744);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+        z-index: 10;
+        animation: glowText 2s ease-in-out infinite, floatLabel 3s ease-in-out infinite;
+        box-shadow: 0 4px 15px rgba(255, 23, 68, 0.5);
+        display: none;
+    }
+
+        .click-me-label.show {
+            display: block;
+        }
+    .click-me-label::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        right: 30px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #FF1744;
+    }
+        
+
+    @keyframes glowText {
+        0%, 100% {
+            box-shadow: 0 0 15px rgba(255, 23, 68, 0.6);
+        }
+        50% {
+            box-shadow: 0 0 30px rgba(255, 23, 68, 0.9),
+                        0 0 40px rgba(124, 77, 255, 0.4);
+        }
+    }
+
+    @keyframes floatLabel {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+
+
+        /* Ripple effect for attention */
+        .ripple-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid rgba(124, 77, 255, 0.8);
+            animation: ripple 2s linear infinite;
+            pointer-events: none;
+ z-index: -1;
+        }
+
+        .ripple-effect:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .ripple-effect:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+            @keyframes ripple {
+        0% {
+            width: 70px;
+            height: 70px;
+            opacity: 1;
+            border-width: 3px;
+        }
+        100% {
+            width: 180px;
+            height: 180px;
+            opacity: 0;
+            border-width: 1px;
+        }
+    }
+
+        /* First time visitor overlay hint */
+        .first-time-hint {
+            position: fixed;
+            bottom: 120px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            max-width: 300px;
+            z-index: 999;
+            display: none;
+            animation: slideUp 0.5s ease;
+            border: 2px solid #7C4DFF;
+        }
+
+        .first-time-hint.show {
+            display: block;
+        }
+
+        .first-time-hint h4 {
+            margin-bottom: 10px;
+            color: #2EE6D6;
+        }
+
+        .first-time-hint p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .hint-cta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .hint-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .hint-btn.primary {
+            background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+            color: white;
+        }
+
+        .hint-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hint-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-window {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 420px;
+            height: 650px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            border: 1px solid rgba(124, 77, 255, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4),
+                        0 0 50px rgba(124, 77, 255, 0.1);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUpFade 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(20px);
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .chatbot-window.active {
+            display: flex;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #7C4DFF 0%, #9575CD 50%, #2EE6D6 100%);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chatbot-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: header-shine 3s infinite;
+        }
+
+        @keyframes header-shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .chatbot-header-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chatbot-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .avatar-status {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 14px;
+            height: 14px;
+            background: #00ff00;
+            border: 2px solid white;
+            border-radius: 50%;
+            animation: pulse-status 2s infinite;
+        }
+
+        @keyframes pulse-status {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+            }
+            50% { 
+                transform: scale(1.1);
+                box-shadow: 0 0 0 4px rgba(0, 255, 0, 0);
+            }
+        }
+
+        .chatbot-status {
+            color: white;
+        }
+
+        .chatbot-status h4 {
+            margin-bottom: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbot-status span {
+            font-size: 12px;
+            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .typing-animation {
+            display: inline-flex;
+            gap: 2px;
+        }
+
+        .typing-dot-small {
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: typing-small 1.4s infinite;
+        }
+
+        .typing-dot-small:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot-small:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing-small {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-3px); opacity: 1; }
+        }
+
+        .chatbot-actions {
+            display: flex;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+
+        .chatbot-close {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255, 67, 54, 0.8);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.3), rgba(13, 13, 13, 0.5));
+            position: relative;
+        }
+
+        .chatbot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .chatbot-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+            border-radius: 3px;
+        }
+
+        .date-divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .date-divider span {
+            background: rgba(124, 77, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chat-message {
+            margin-bottom: 20px;
+            animation: messageSlide 0.3s ease;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-message.bot {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .bot-avatar-mini {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 3px 10px rgba(124, 77, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .message-wrapper {
+            max-width: 75%;
+        }
+
+        .message-content {
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            padding: 14px 18px;
+            border-radius: 18px;
+            border-top-left-radius: 4px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .message-content:hover {
+            background: rgba(124, 77, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 77, 255, 0.2);
+        }
+
+        .chat-message.user {
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .chat-message.user .message-content {
+            background: linear-gradient(135deg, #7C4DFF, #9575CD);
+            border: none;
+            color: white;
+            border-radius: 18px;
+            border-top-right-radius: 4px;
+            box-shadow: 0 3px 15px rgba(124, 77, 255, 0.3);
+        }
+
+        .message-time {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .message-status {
+            display: flex;
+            gap: 2px;
+        }
+
+        .check-mark {
+            width: 12px;
+            height: 12px;
+            color: #2EE6D6;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 14px 18px;
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            border-radius: 18px;
+            width: fit-content;
+            backdrop-filter: blur(10px);
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+            border-radius: 50%;
+            animation: typingDot 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingDot {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        /* Quick Suggestions */
+        .suggestions-container {
+            padding: 16px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(124, 77, 255, 0.2);
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .suggestions-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .suggestion-chip {
+            padding: 8px 16px;
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.3);
+            border-radius: 20px;
+            color: white;
+            font-size: 13px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: chipSlide 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .suggestion-chip:hover {
+            background: linear-gradient(135deg, #7C4DFF, #9575CD);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 77, 255, 0.3);
+        }
+
+        @keyframes chipSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .suggestion-chip:nth-child(1) { animation-delay: 0.1s; }
+        .suggestion-chip:nth-child(2) { animation-delay: 0.2s; }
+        .suggestion-chip:nth-child(3) { animation-delay: 0.3s; }
+        .suggestion-chip:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Enhanced Input Area */
+        .chatbot-input {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(124, 77, 255, 0.2);
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .input-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .input-action-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .input-action-btn:hover {
+            background: rgba(124, 77, 255, 0.2);
+            border-color: rgba(124, 77, 255, 0.4);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(124, 77, 255, 0.05);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            border-radius: 14px;
+            padding: 12px 18px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .chat-input:focus {
+            outline: none;
+            background: rgba(124, 77, 255, 0.1);
+            border-color: #7C4DFF;
+            box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.1);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .send-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+
+        .send-button:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(124, 77, 255, 0.4);
+        }
+
+        .send-button svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .send-button:hover svg {
+            transform: translateX(2px);
+        }
+
+        /* Voice Recording Animation */
+        .voice-recording {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 67, 54, 0.1);
+            border: 1px solid rgba(255, 67, 54, 0.3);
+            border-radius: 14px;
+            animation: recordPulse 1.5s infinite;
+        }
+
+        @keyframes recordPulse {
+            0%, 100% { background: rgba(255, 67, 54, 0.1); }
+            50% { background: rgba(255, 67, 54, 0.2); }
+        }
+
+        .voice-wave {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .wave-bar {
+            width: 3px;
+            background: #FF5252;
+            border-radius: 3px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { height: 15px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { height: 25px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { height: 18px; animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chatbot-features {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .use-case-content.active {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .chatbot-window {
+                width: 100%;
+                height: 100%;
+                right: 0;
+                bottom: 0;
+                border-radius: 0;
+            }
+
+            .chatbot-toggle {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">ForgeItOps</div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#technology">Technology</a>
+                    <a href="#services">Services</a>
+                    <a href="#use-cases">Use Cases</a>
+                    <a href="#testimonials">Reviews</a>
+                    <a href="#contact" class="nav-cta">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>ForgeItOps – Premium IT Solutions for the <span class="gradient-text">Future of Web, AI, and Cloud</span></h1>
+                    <p>We help businesses scale with intelligent chatbots, modern websites, and enterprise DevOps infrastructure.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn-primary">
+                            Book a Demo
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#services" class="btn-secondary">
+                            Discover Our Services
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="chatbot-showcase">
+                        <div class="showcase-window">
+                            <div class="showcase-header">
+                                <div class="chatbot-avatar">🤖</div>
+                                <div class="chatbot-status">
+                                    <h4>ForgeBot AI Assistant</h4>
+                                    <span>🟢 Live Demo - Watch Our AI in Action</span>
+                                </div>
+                            </div>
+                            <div class="showcase-messages">
+                                <div class="demo-message bot">
+                                    <div class="demo-bubble">
+                                        Hello! I'm ForgeBot, your AI assistant. I can help with anything from restaurant bookings to enterprise solutions! 🚀
+                                    </div>
+                                </div>
+                                <div class="demo-message user">
+                                    <div class="demo-bubble">
+                                        Can you show me today's menu?
+                                    </div>
+                                </div>
+                                <div class="demo-message bot">
+                                    <div class="demo-bubble">
+                                        Of course! Here's today's special menu 🍽️
+                                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Menu" class="demo-image">
+                                        <div class="demo-buttons">
+                                            <button class="demo-button">📅 Book a Table</button>
+                                            <button class="demo-button">📞 Call Us</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="demo-message user">
+                                    <div class="demo-bubble">
+                                        I need DevOps consultation
+                                    </div>
+                                </div>
+                                <div class="demo-message bot">
+                                    <div class="demo-bubble">
+                                        Excellent! We offer comprehensive DevOps solutions including:
+                                        <br>• Cloud Infrastructure (AWS/Azure)
+                                        <br>• CI/CD Pipeline Setup
+                                        <br>• Kubernetes Orchestration
+                                        <br>• 24/7 Monitoring
+                                        <br><br>
+                                        <a href="#contact" class="demo-link">📊 View Our Case Studies</a>
+                                        <br>
+                                        <a href="#contact" class="demo-link">📧 Schedule Free Consultation</a>
+                                    </div>
+                                </div>
+                                <div class="demo-message bot">
+                                    <div class="demo-bubble">
+                                        Here's a real-time preview of our monitoring dashboard:
+                                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop" alt="Dashboard" class="demo-image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-badge badge-1">
+                        <span style="font-size: 24px;">🚀</span> 99.9% Uptime
+                    </div>
+                    <div class="floating-badge badge-2">
+                        <span style="font-size: 24px;">⚡</span> 24/7 Support
+                    </div>
+                    <div class="floating-badge badge-3">
+                        <span style="font-size: 24px;">🌍</span> Global Scale
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">About Us</span>
+                <h2 class="section-title">Building the Future of Digital Infrastructure</h2>
+                <p class="section-subtitle">Founded by Imad & Khawla, ForgeItOps is powered by a global team of developers and AI data engineers passionate about building cutting-edge solutions.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Transforming Businesses Through Technology</h3>
+                    <p>At ForgeItOps, we don't just build solutions – we forge partnerships that drive digital transformation. Our expertise spans from intelligent AI systems to robust cloud infrastructure, all designed to scale with your ambitions.</p>
+                    <p>With a foundation built on innovation, reliability, and scalability, we empower businesses worldwide to achieve their full potential in the digital age.</p>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon">💡</div>
+                            <h4>Innovation</h4>
+                            <p>Cutting-edge solutions that push boundaries</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">🔒</div>
+                            <h4>Reliability</h4>
+                            <p>99.9% uptime guaranteed infrastructure</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">📈</div>
+                            <h4>Scalability</h4>
+                            <p>Grow without limits or constraints</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="team-illustration">
+                        <div style="text-align: center;">
+                            <div style="font-size: 80px; margin-bottom: 20px;">🌐</div>
+                            <h3 style="color: var(--heading-dark); margin-bottom: 16px;">Global Team Excellence</h3>
+                            <p style="color: var(--body-text);">Developers, AI Engineers, and DevOps Experts working 24/7 to deliver exceptional solutions</p>
+                            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
+                                <div style="font-size: 40px;">👨‍💻</div>
+                                <div style="font-size: 40px;">👩‍💻</div>
+                                <div style="font-size: 40px;">🤖</div>
+                                <div style="font-size: 40px;">☁️</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot Technology Section -->
+    <section class="chatbot-section" id="technology">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label" style="background: linear-gradient(135deg, var(--neon-aqua), var(--electric-blue)); color: white;">AI Technology</span>
+                <h2 class="section-title" style="color: white;">Our Chatbot Technology</h2>
+                <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Next-generation AI chatbots with advanced capabilities</p>
+            </div>
+            <div class="chatbot-features">
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon">🧠</div>
+                        <div class="feature-text">
+                            <h4>Domain-Specific Answers (RAG)</h4>
+                            <p>Advanced retrieval-augmented generation for accurate, contextual responses tailored to your industry</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📸</div>
+                        <div class="feature-text">
+                            <h4>Rich Media Support</h4>
+                            <p>Send pictures, menus, links, PDFs, and multimedia content seamlessly to enhance user experience</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📅</div>
+                        <div class="feature-text">
+                            <h4>Automate Reservations & Database Logging</h4>
+                            <p>Automatically handle bookings, appointments, and log all interactions into your database</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💾</div>
+                        <div class="feature-text">
+                            <h4>Memory Database Integration</h4>
+                            <p>Recall past discussions and maintain context across conversations for personalized experiences</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏢</div>
+                        <div class="feature-text">
+                            <h4>Industry Adaptable</h4>
+                            <p>Perfect for restaurants, healthcare, education, startups, and enterprise businesses</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chatbot-demo">
+                    <div class="chat-widget-preview">
+                        <div class="showcase-header">
+                            <div class="chatbot-avatar">🤖</div>
+                            <div class="chatbot-status">
+                                <h4>Smart Features Demo</h4>
+                                <span>See our chatbot capabilities in action</span>
+                            </div>
+                        </div>
+                        <div class="showcase-messages" style="height: 500px;">
+                            <div class="demo-message bot">
+                                <div class="demo-bubble">
+                                    Welcome! I can help you with:
+                                    <br>📷 Share images and documents
+                                    <br>📊 Access real-time data
+                                    <br>📅 Book appointments
+                                    <br>💬 Remember our past conversations
+                                </div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-bubble">
+                                    Show me the restaurant menu
+                                </div>
+                            </div>
+                            <div class="demo-message bot">
+                                <div class="demo-bubble">
+                                    Here's our menu for today! 
+                                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" alt="Food Menu" class="demo-image">
+                                    <div class="demo-buttons">
+                                        <button class="demo-button">📅 Reserve Table</button>
+                                        <button class="demo-button">📱 View PDF</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Our Services</span>
+                <h2 class="section-title">Enterprise Solutions That Scale</h2>
+                <p class="section-subtitle">From concept to deployment, we deliver end-to-end technology solutions</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🎨</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Website Design & Development</h3>
+                        <p>Modern, responsive websites built with React, Next.js, and cutting-edge technologies. Optimized for performance and user experience.</p>
+                        <div class="service-logs">
+                            <div class="log-line log-info">$ npm run build</div>
+                            <div class="log-line log-success">✓ Build optimized (2.4s)</div>
+                            <div class="log-line log-success">✓ SEO score: 100/100</div>
+                            <div class="log-line log-success">✓ Performance: 98/100</div>
+                            <div class="log-line log-info">$ vercel deploy --prod</div>
+                            <div class="log-line log-success">✓ Deployed to production</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">🤖</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>AI Chatbots</h3>
+                        <p>Intelligent conversational AI with NLP, machine learning, and custom training. Integrate with any platform seamlessly.</p>
+                        <div class="service-logs">
+                            <div class="log-line log-info">$ python inference.py</div>
+                            <div class="log-line log-warning">Loading model weights...</div>
+                            <div class="log-line log-success">✓ Model loaded (GPT-4)</div>
+                            <div class="log-line log-success">✓ RAG database connected</div>
+                            <div class="log-line log-info">Response time: 0.2s</div>
+                            <div class="log-line log-success">✓ API endpoint ready</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">☁️</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Cloud & DevOps Solutions</h3>
+                        <p>AWS, Azure, and DigitalOcean infrastructure design, deployment, and management. Complete CI/CD pipelines.</p>
+                        <div class="service-logs">
+                            <div class="log-line log-info">$ aws ec2 describe-instances</div>
+                            <div class="log-line log-success">✓ 12 instances running</div>
+                            <div class="log-line log-info">$ terraform apply</div>
+                            <div class="log-line log-success">✓ Infrastructure updated</div>
+                            <div class="log-line log-info">$ kubectl get pods</div>
+                            <div class="log-line log-success">✓ All pods healthy</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">⚙️</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Enterprise DevOps Stack</h3>
+                        <p>Complete DevOps transformation with Jenkins, GitHub Actions, monitoring, and automation tools.</p>
+                        <div class="service-logs">
+                            <div class="log-line log-info">$ docker ps</div>
+                            <div class="log-line log-success">✓ 15 containers running</div>
+                            <div class="log-line log-info">$ jenkins build #427</div>
+                            <div class="log-line log-success">✓ Build successful</div>
+                            <div class="log-line log-info">$ prometheus status</div>
+                            <div class="log-line log-success">✓ Monitoring active</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why ForgeItOps Section -->
+    <section class="why-section" id="why">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label" style="background: linear-gradient(135deg, var(--emerald-green), var(--electric-blue)); color: white;">Why Choose Us</span>
+                <h2 class="section-title" style="color: white;">Trusted to Power Modern Enterprises</h2>
+                <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Real results, proven expertise, and unwavering commitment to excellence</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime Guarantee</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Projects Delivered</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Enterprise Clients</div>
+                </div>
+            </div>
+            
+            <div class="dashboard-preview">
+                <div class="dashboard-header">
+                    <div class="dashboard-title">
+                        <span class="status-indicator"></span>
+                        Live Infrastructure Dashboard - Grafana/Prometheus
+                    </div>
+                    <span style="color: rgba(255, 255, 255, 0.6);">Last updated: 2 seconds ago</span>
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">99.98%</div>
+                        <div class="metric-label">System Uptime</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">0.23s</div>
+                        <div class="metric-label">Avg Response Time</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">1.2M</div>
+                        <div class="metric-label">Requests/Day</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Use Cases Section -->
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Use Cases</span>
+                <h2 class="section-title">Solutions for Every Industry</h2>
+                <p class="section-subtitle">See how ForgeItOps transforms businesses across different sectors</p>
+            </div>
+            <div class="use-cases-tabs">
+                <button class="tab-btn active" onclick="showUseCase('startups')">Startups</button>
+                <button class="tab-btn" onclick="showUseCase('enterprise')">Enterprises</button>
+                <button class="tab-btn" onclick="showUseCase('restaurants')">Restaurants</button>
+                <button class="tab-btn" onclick="showUseCase('healthcare')">Healthcare</button>
+                <button class="tab-btn" onclick="showUseCase('education')">Education</button>
+                <button class="tab-btn" onclick="showUseCase('worldwide')">Worldwide Business</button>
+            </div>
+            
+            <div class="use-case-content active" id="startups">
+                <div class="use-case-text">
+                    <h3>Scalable Infrastructure for Startups</h3>
+                    <p>Launch fast and scale effortlessly with our cloud-native solutions. We provide the technical foundation that grows with your startup.</p>
+                    <ul class="use-case-list">
+                        <li>✅ Rapid MVP development and deployment</li>
+                        <li>✅ Cost-optimized cloud infrastructure</li>
+                        <li>✅ Automated CI/CD pipelines</li>
+                        <li>✅ 24/7 monitoring and support</li>
+                    </ul>
+                </div>
+                <div class="use-case-visual">
+                    <div class="infra-diagram">
+                        <div style="text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🚀</div>
+                            <h4 style="color: var(--heading-dark);">Startup Infrastructure</h4>
+                            <p style="color: var(--body-text); margin: 20px 0;">Auto-scaling • Load Balancing • CDN • Monitoring</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="use-case-content" id="enterprise">
+                <div class="use-case-text">
+                    <h3>Enterprise-Grade DevOps & Monitoring</h3>
+                    <p>Transform your enterprise with robust DevOps practices, global infrastructure, and comprehensive monitoring solutions.</p>
+                    <ul class="use-case-list">
+                        <li>✅ Global multi-region deployment</li>
+                        <li>✅ Advanced monitoring with Grafana/Prometheus</li>
+                        <li>✅ Zero-downtime deployments</li>
+                        <li>✅ Enterprise security compliance</li>
+                    </ul>
+                </div>
+                <div class="use-case-visual">
+                    <div class="infra-diagram">
+                        <div style="text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🏢</div>
+                            <h4 style="color: var(--heading-dark);">Enterprise DevOps</h4>
+                            <p style="color: var(--body-text); margin: 20px 0;">Jenkins • Kubernetes • Docker • Terraform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="use-case-content" id="restaurants">
+                <div class="use-case-text">
+                    <h3>Smart Restaurant Solutions</h3>
+                    <p>Enhance customer experience with AI chatbots that handle reservations, send menus, and manage orders seamlessly.</p>
+                    <ul class="use-case-list">
+                        <li>✅ Automated table reservations</li>
+                        <li>✅ Digital menu sharing</li>
+                        <li>✅ Order management system</li>
+                        <li>✅ Customer feedback collection</li>
+                    </ul>
+                </div>
+                <div class="use-case-visual">
+                    <div class="infra-diagram">
+                        <div style="text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🍽️</div>
+                            <h4 style="color: var(--heading-dark);">Restaurant Chatbot</h4>
+                            <p style="color: var(--body-text); margin: 20px 0;">Menu Sharing • Bookings • Orders • Reviews</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="use-case-content" id="healthcare">
+                <div class="use-case-text">
+                    <h3>Healthcare Automation</h3>
+                    <p>Streamline patient scheduling, automate appointment reminders, and provide 24/7 patient support.</p>
+                    <ul class="use-case-list">
+                        <li>✅ Automated patient scheduling</li>
+                        <li>✅ Appointment reminders</li>
+                        <li>✅ Medical FAQ chatbot</li>
+                        <li>✅ HIPAA compliant infrastructure</li>
+                    </ul>
+                </div>
+                <div class="use-case-visual">
+                    <div class="infra-diagram">
+                        <div style="text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🏥</div>
+                            <h4 style="color: var(--heading-dark);">Healthcare AI</h4>
+                            <p style="color: var(--body-text); margin: 20px 0;">Scheduling • Reminders • Support • Compliance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="use-case-content" id="education">
+                <div class="use-case-text">
+                    <h3>Education Technology</h3>
+                    <p>Deploy AI tutors, FAQ bots, and learning management systems that enhance educational experiences.</p>
+                    <ul class="use-case-list">
+                        <li>✅ AI-powered tutoring</li>
+                        <li>✅ Student FAQ bots</li>
+                        <li>✅ Course management systems</li>
+                        <li>✅ Interactive learning platforms</li>
+                    </ul>
+                </div>
+                <div class="use-case-visual">
+                    <div class="infra-diagram">
+                        <div style="text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🎓</div>
+                            <h4 style="color: var(--heading-dark);">Education Platform</h4>
+                            <p style="color: var(--body-text); margin: 20px 0;">AI Tutors • FAQ Bots • LMS • Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="use-case-content" id="worldwide">
+                <div class="use-case-text">
+                    <h3>Worldwide Business Solutions</h3>
+                    <p>Global website design and chatbot solutions for businesses operating across multiple regions and languages.</p>
+                    <ul class="use-case-list">
+                        <li>✅ Multi-language support</li>
+                        <li>✅ Global CDN deployment</li>
+                        <li>✅ Localized chatbot responses</li>
+                        <li>✅ International payment integration</li>
+                    </ul>
+                </div>
+                <div class="use-case-visual">
+                    <div class="infra-diagram">
+                        <div style="text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">🌍</div>
+                            <h4 style="color: var(--heading-dark);">Global Solutions</h4>
+                            <p style="color: var(--body-text); margin: 20px 0;">Multi-region • Multi-language • 24/7 Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label" style="background: linear-gradient(135deg, var(--soft-gold), var(--primary-gradient-end)); color: white;">Testimonials</span>
+                <h2 class="section-title" style="color: white;">What Our Clients Say</h2>
+                <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Real feedback from businesses we've helped transform</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"ForgeItOps transformed our infrastructure — from chaos to seamless automation. Their DevOps expertise saved us countless hours and significantly reduced our operational costs."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>John Davidson</h4>
+                            <p>CTO, TechStart Inc.</p>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Their AI chatbot boosted our customer engagement by 200%. The intelligent responses and seamless integration exceeded our expectations."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Marketing Director, E-Shop Global</p>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"We trust ForgeItOps for enterprise-grade cloud and DevOps expertise. They delivered a robust, scalable solution that handles millions of requests daily."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RC</div>
+                        <div class="author-info">
+                            <h4>Robert Chen</h4>
+                            <p>VP Engineering, FinTech Solutions</p>
+                        </div>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Get Started</span>
+                <h2 class="section-title">Let's Forge the Future Together</h2>
+                <p class="section-subtitle">Ready to transform your business? Get in touch with our expert team today.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Start Your Digital Transformation</h3>
+                    <p>Whether you need a cutting-edge website, intelligent AI chatbot, or enterprise DevOps solutions, we're here to help you succeed.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-text">
+                                <h4>Email Us</h4>
+                                <p>contact@forgeitops.solutions</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-text">
+                                <h4>Call Us</h4>
+                                <p>+212 640 036 156</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🌍</div>
+                            <div class="contact-text">
+                                <h4>Global Reach</h4>
+                                <p>Serving clients worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 40px; display: flex; gap: 20px;">
+                        <a href="#" class="btn-primary">Schedule a Demo</a>
+                        <a href="#" class="btn-secondary">Download Brochure</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company *</label>
+                                <input type="text" id="company" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="project">Project Details *</label>
+                            <textarea id="project" class="form-control" required placeholder="Tell us about your project requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">
+                            Send Message
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">ForgeItOps.solutions</div>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#technology">Technology</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ForgeItOps.solutions. All rights reserved. | Premium IT Solutions for the Future</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Ultra Premium Chatbot Widget with Attention Grabbers -->
+    <div class="chatbot-widget">
+        <div class="chatbot-toggle" onclick="toggleChatbot()">
+            <div class="bot-avatar-toggle">
+                <!-- Professional Cloud IT Avatar SVG -->
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="botGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#7C4DFF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2EE6D6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Cloud Shape -->
+                    <path d="M 25 60 Q 25 50, 35 50 Q 35 40, 50 40 Q 65 40, 65 50 Q 75 50, 75 60 Q 75 70, 65 70 L 35 70 Q 25 70, 25 60" 
+                          fill="white" opacity="0.9"/>
+                    <!-- Circuit Lines -->
+                    <path d="M 50 45 L 50 35 M 45 50 L 35 50 M 55 50 L 65 50 M 50 65 L 50 75" 
+                          stroke="url(#botGradient)" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Central Node -->
+                    <circle cx="50" cy="50" r="8" fill="url(#botGradient)"/>
+                    <circle cx="50" cy="35" r="3" fill="url(#botGradient)"/>
+                    <circle cx="35" cy="50" r="3" fill="url(#botGradient)"/>
+                    <circle cx="65" cy="50" r="3" fill="url(#botGradient)"/>
+                    <circle cx="50" cy="75" r="3" fill="url(#botGradient)"/>
+                </svg>
+            </div>
+            <span class="notification-badge">1</span>
+        </div>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <div class="chatbot-avatar">
+                        <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#7C4DFF;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#2EE6D6;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M 25 60 Q 25 50, 35 50 Q 35 40, 50 40 Q 65 40, 65 50 Q 75 50, 75 60 Q 75 70, 65 70 L 35 70 Q 25 70, 25 60" 
+                                  fill="url(#avatarGrad)" opacity="0.9"/>
+                            <circle cx="40" cy="55" r="3" fill="white"/>
+                            <circle cx="60" cy="55" r="3" fill="white"/>
+                            <path d="M 40 62 Q 50 67, 60 62" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        </svg>
+                        <div class="avatar-status"></div>
+                    </div>
+                    <div class="chatbot-status">
+                        <h4>ForgeBot Pro Assistant</h4>
+                        <span>
+                            🟢 Online 
+                            <span class="typing-animation">
+                                <span class="typing-dot-small"></span>
+                                <span class="typing-dot-small"></span>
+                                <span class="typing-dot-small"></span>
+                            </span>
+                            AI Ready
+                        </span>
+                    </div>
+                </div>
+                <div class="chatbot-actions">
+                                        <button class="action-btn" onclick="minimizeChatbot()" title="Minimize">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 13H5v-2h14v2z"/>
+                        </svg>
+                    </button>
+                    <button class="action-btn" onclick="downloadChat()" title="Download Chat">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                    </button>
+                    <button class="action-btn chatbot-close" onclick="toggleChatbot()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="date-divider">
+                    <span>Today</span>
+                </div>
+                <div class="chat-message bot">
+                    <div class="bot-avatar-mini">🚀</div>
+                    <div class="message-wrapper">
+                        <div class="message-content">
+                            <p>Welcome to <strong>ForgeItOps</strong>! 👋</p>
+                            <p style="margin-top: 8px;">I'm your AI-powered assistant, ready to help you with:</p>
+                            <ul style="margin: 8px 0; padding-left: 20px;">
+                                <li>☁️ Cloud & DevOps Solutions</li>
+                                <li>🤖 AI Chatbot Development</li>
+                                <li>🌐 Modern Web Development</li>
+                                <li>🚀 Enterprise Infrastructure</li>
+                            </ul>
+                            <p style="margin-top: 8px;">How can I assist you today?</p>
+                        </div>
+                        <div class="message-time">
+                            <span>Just now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="suggestions-container" id="suggestions">
+                <div class="suggestion-chip" onclick="sendSuggestion('Tell me about your services')">
+                    💼 Your Services
+                </div>
+                <div class="suggestion-chip" onclick="sendSuggestion('I need a chatbot for my business')">
+                    🤖 Build a Chatbot
+                </div>
+                <div class="suggestion-chip" onclick="sendSuggestion('Show me pricing plans')">
+                    💰 Pricing Plans
+                </div>
+                <div class="suggestion-chip" onclick="sendSuggestion('Schedule a demo')">
+                    📅 Book Demo
+                </div>
+                <div class="suggestion-chip" onclick="sendSuggestion('DevOps consultation')">
+                    ⚙️ DevOps Help
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <div class="voice-recording" id="voiceRecording">
+                    <div class="voice-wave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                    <span style="color: #FF5252; font-size: 12px;">Recording...</span>
+                </div>
+                <div class="input-container" id="inputContainer">
+                    <div class="input-actions">
+                        <button class="input-action-btn" onclick="attachFile()" title="Attach File">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/>
+                            </svg>
+                        </button>
+                        <button class="input-action-btn" onclick="toggleVoice()" title="Voice Input">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <input 
+                        type="text" 
+                        class="chat-input" 
+                        id="chatInput" 
+                        placeholder="Type your message or ask a question..." 
+                        onkeypress="handleKeyPress(event)"
+                        autocomplete="off"
+                    >
+                    <button class="send-button" onclick="sendMessage()">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attention Grabbing Notifications -->
+    <div class="welcome-notification" id="welcomeNotification" onclick="toggleChatbot()">
+        👋 Hi! I'm here to help you explore our services!
+    </div>
+
+    <div class="typing-bubble" id="typingBubble">
+        <span style="color: #7C4DFF; font-weight: 600; font-size: 14px;">ForgeBot is typing</span>
+        <div class="typing-dots">
+            <div class="typing-dot-bubble"></div>
+            <div class="typing-dot-bubble"></div>
+            <div class="typing-dot-bubble"></div>
+        </div>
+    </div>
+
+    <div class="first-time-hint" id="firstTimeHint">
+        <h4>🎉 Welcome to ForgeItOps!</h4>
+        <p>I'm your AI assistant ready to help you with:</p>
+        <ul style="margin: 0 0 15px 20px; font-size: 13px;">
+            <li>Custom chatbot solutions</li>
+            <li>DevOps & Cloud services</li>
+            <li>Modern web development</li>
+        </ul>
+        <div class="hint-cta">
+            <button class="hint-btn primary" onclick="openChatWithMessage('Hi! Show me your services')">Start Chat</button>
+            <button class="hint-btn secondary" onclick="dismissHint()">Maybe Later</button>
+        </div>
+    </div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading-screen').classList.add('hide');
+            }, 1500);
+        });
+
+        // Particle Effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Tab switching for use cases
+        function showUseCase(caseId) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.use-case-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(caseId).classList.add('active');
+        }
+
+        // Ultra Premium Chatbot Functions
+        let chatbotOpen = false;
+        let isRecording = false;
+        let messageCount = 0;
+
+        // Enhanced attention-grabbing functionality
+        let hasInteracted = localStorage.getItem('hasInteractedWithChat');
+        let attentionTimer;
+        let messageSequence = [
+            "👋 Hi there! Need help?",
+            "🚀 Discover our AI solutions!",
+            "💬 Let's chat about your project!",
+            "🎯 Get a free consultation!",
+            "✨ See what we can build together!"
+        ];
+        let currentMessageIndex = 0;
+
+        // Initialize attention grabbers for new users
+        function initAttentionGrabbers() {
+        if (!hasInteracted) {
+            const toggle = document.querySelector('.chatbot-toggle');
+            
+            // Clear any existing attention elements first
+            const existingElements = toggle.querySelectorAll('.wave-hand, .ripple-effect, .spotlight, .click-me-label, .hint-arrow');
+            existingElements.forEach(el => el.remove());
+            
+            // Add attention pulse class
+            toggle.classList.add('attention-pulse');
+            
+            // Add wave hand with better positioning
+            const waveHand = document.createElement('div');
+            waveHand.className = 'wave-hand';
+            waveHand.innerHTML = '👋';
+            toggle.appendChild(waveHand);
+            console.log('Wave hand added'); // Debug log
+            
+            // Add multiple ripple effects with delays
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const ripple = document.createElement('div');
+                    ripple.className = 'ripple-effect';
+                    ripple.style.animationDelay = `${i * 0.7}s`;
+                    toggle.appendChild(ripple);
+                }, i * 200);
+            }
+            
+            // Add spotlight
+            const spotlight = document.createElement('div');
+            spotlight.className = 'spotlight show';
+            toggle.appendChild(spotlight);
+
+            
+            // Add hint arrow
+            setTimeout(() => {
+                const hintArrow = document.createElement('div');
+                hintArrow.className = 'hint-arrow';
+                hintArrow.innerHTML = `
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+                    </svg>
+                `;
+                toggle.appendChild(hintArrow);
+            }, 1500);
+            
+            // Add shake animation after some time
+            setTimeout(() => {
+                toggle.classList.add('shake-animation');
+            }, 3000);
+            
+            // Show welcome notification
+            setTimeout(() => {
+                const notification = document.getElementById('welcomeNotification');
+                if (notification) {
+                    notification.classList.add('show');
+                    playNotificationSound();
+                }
+            }, 2000);
+            
+            // Show typing bubble
+            setTimeout(() => {
+                const typingBubble = document.getElementById('typingBubble');
+                if (typingBubble) {
+                    typingBubble.classList.add('show');
+                }
+            }, 4000);
+            
+            // Show first time hint
+            setTimeout(() => {
+                const firstTimeHint = document.getElementById('firstTimeHint');
+                if (firstTimeHint) {
+                    firstTimeHint.classList.add('show');
+                }
+            }, 6000);
+            
+            // Start message rotation
+            if (!attentionTimer) {
+                attentionTimer = setInterval(() => {
+                    rotateNotificationMessage();
+                }, 5000);
+            }
+        }
+    }
+            if (!hasInteracted) {
+                // Add attention pulse to toggle button
+                const toggle = document.querySelector('.chatbot-toggle');
+                toggle.classList.add('attention-pulse');
+                
+                // Add wave hand
+                const waveHand = document.createElement('div');
+                waveHand.className = 'wave-hand';
+                waveHand.innerHTML = '👋';
+                toggle.appendChild(waveHand);
+                
+                // Add ripple effects
+                for (let i = 0; i < 3; i++) {
+                    const ripple = document.createElement('div');
+                    ripple.className = 'ripple-effect';
+                    toggle.appendChild(ripple);
+                }
+                
+                // Add spotlight
+                const spotlight = document.createElement('div');
+                spotlight.className = 'spotlight show';
+                toggle.appendChild(spotlight);
+                
+                // Add click me label
+                const clickLabel = document.createElement('div');
+                clickLabel.className = 'click-me-label show';
+                clickLabel.textContent = 'Click me! 👆';
+                toggle.appendChild(clickLabel);
+                
+                // Add hint arrow
+                const hintArrow = document.createElement('div');
+                hintArrow.className = 'hint-arrow';
+                hintArrow.innerHTML = `
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+                    </svg>
+                `;
+                toggle.appendChild(hintArrow);
+                
+                // Show welcome notification after 2 seconds
+                setTimeout(() => {
+                    const notification = document.getElementById('welcomeNotification');
+                    notification.classList.add('show');
+                    
+                    // Play notification sound (optional)
+                    playNotificationSound();
+                }, 2000);
+                
+                // Show typing bubble after 4 seconds
+                setTimeout(() => {
+                    const typingBubble = document.getElementById('typingBubble');
+                    typingBubble.classList.add('show');
+                }, 4000);
+                
+                // Show first time hint after 6 seconds
+                setTimeout(() => {
+                    const firstTimeHint = document.getElementById('firstTimeHint');
+                    firstTimeHint.classList.add('show');
+                }, 6000);
+                
+                // Rotate messages in notification
+                attentionTimer = setInterval(() => {
+                    rotateNotificationMessage();
+                }, 5000);
+            }
+        
+        // Rotate notification messages
+        function rotateNotificationMessage() {
+            const notification = document.getElementById('welcomeNotification');
+            if (notification.classList.contains('show')) {
+                currentMessageIndex = (currentMessageIndex + 1) % messageSequence.length;
+                notification.style.animation = 'none';
+                setTimeout(() => {
+                    notification.textContent = messageSequence[currentMessageIndex];
+                    notification.style.animation = 'slideInNotification 0.5s ease forwards';
+                }, 100);
+            }
+        }
+
+        // Play notification sound (optional - you can add an audio file)
+        function playNotificationSound() {
+            // Create an audio element if you want sound
+            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE');
+            audio.volume = 0.3;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+        }
+
+        // Open chat with predefined message
+        function openChatWithMessage(message) {
+            dismissHint();
+            toggleChatbot();
+            setTimeout(() => {
+                document.getElementById('chatInput').value = message;
+                sendMessage();
+            }, 500);
+        }
+
+        // Dismiss hint
+        function dismissHint() {
+            document.getElementById('firstTimeHint').classList.remove('show');
+            clearAttentionGrabbers();
+        }
+
+        // Clear all attention grabbers
+        function clearAttentionGrabbers() {
+            localStorage.setItem('hasInteractedWithChat', 'true');
+            hasInteracted = true;
+            
+            // Remove all attention elements
+            const toggle = document.querySelector('.chatbot-toggle');
+            toggle.classList.remove('attention-pulse');
+            
+            const elementsToRemove = toggle.querySelectorAll('.wave-hand, .ripple-effect, .spotlight, .click-me-label, .hint-arrow');
+            elementsToRemove.forEach(el => el.remove());
+            
+            // Hide notifications
+            document.getElementById('welcomeNotification').classList.remove('show');
+            document.getElementById('typingBubble').classList.remove('show');
+            document.getElementById('firstTimeHint').classList.remove('show');
+            
+            // Clear timer
+            if (attentionTimer) {
+                clearInterval(attentionTimer);
+            }
+        }
+
+        function toggleChatbot() {
+            clearAttentionGrabbers();
+            const chatWindow = document.getElementById('chatbotWindow');
+            const toggle = document.querySelector('.chatbot-toggle');
+            chatbotOpen = !chatbotOpen;
+            
+            if (chatbotOpen) {
+                chatWindow.classList.add('active');
+                toggle.style.transform = 'scale(0.9)';
+                document.querySelector('.notification-badge').style.display = 'none';
+                setTimeout(() => {
+                    document.getElementById('chatInput').focus();
+                }, 300);
+                
+                // Show welcome animation
+                if (messageCount === 0) {
+                    setTimeout(() => {
+                        showTypingIndicator();
+                        setTimeout(() => {
+                            removeTypingIndicator();
+                            addWelcomeMessages();
+                        }, 1500);
+                    }, 500);
+                }
+            } else {
+                chatWindow.classList.remove('active');
+                toggle.style.transform = 'scale(1)';
+            }
+        }
+
+        function minimizeChatbot() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            chatWindow.style.transform = 'scale(0.8) translateY(100px)';
+            setTimeout(() => {
+                chatWindow.classList.remove('active');
+                chatWindow.style.transform = '';
+            }, 300);
+        }
+
+        function downloadChat() {
+            // Implementation for downloading chat history
+            alert('Chat history will be downloaded as PDF');
+        }
+
+        function attachFile() {
+            // Implementation for file attachment
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    addMessage(`📎 Attached: ${file.name}`, 'user');
+                    setTimeout(() => {
+                        addMessage('File received! I can help you with this document. What would you like to know?', 'bot');
+                    }, 1000);
+                }
+            };
+            input.click();
+        }
+
+        function toggleVoice() {
+            const voiceRecording = document.getElementById('voiceRecording');
+            const inputContainer = document.getElementById('inputContainer');
+            
+            isRecording = !isRecording;
+            
+            if (isRecording) {
+                voiceRecording.style.display = 'flex';
+                inputContainer.style.display = 'none';
+                
+                // Simulate recording
+                setTimeout(() => {
+                    if (isRecording) {
+                        toggleVoice();
+                        addMessage('🎤 Voice message recorded', 'user');
+                        setTimeout(() => {
+                            addMessage('I understood your voice message. How can I help you with that?', 'bot');
+                        }, 1000);
+                    }
+                }, 3000);
+            } else {
+                voiceRecording.style.display = 'none';
+                inputContainer.style.display = 'flex';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function sendSuggestion(text) {
+            document.getElementById('chatInput').value = text;
+            sendMessage();
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-message bot';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <div class="bot-avatar-mini">💭</div>
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function addWelcomeMessages() {
+            const welcomeMessages = [
+                {
+                    text: "I see you're interested in our services! 🎯",
+                    delay: 500
+                },
+                {
+                    text: "Here are some things I can help you with right away:",
+                    delay: 1000
+                }
+            ];
+            
+            welcomeMessages.forEach(msg => {
+                setTimeout(() => {
+                    addMessage(msg.text, 'bot');
+                }, msg.delay);
+            });
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            
+            const time = new Date().toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit' 
+            });
+            
+            if (sender === 'bot') {
+                messageDiv.innerHTML = `
+                    <div class="bot-avatar-mini">🤖</div>
+                    <div class="message-wrapper">
+                        <div class="message-content">
+                            ${text}
+                        </div>
+                        <div class="message-time">
+                            <span>${time}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="message-wrapper">
+                        <div class="message-content">
+                            ${text}
+                        </div>
+                        <div class="message-time">
+                            <span>${time}</span>
+                            <div class="message-status">
+                                <svg class="check-mark" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                                <svg class="check-mark" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            messageCount++;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Update suggestions based on context
+            updateSuggestions(message);
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            try {
+                // Send to API
+                const response = await fetch('https://pet-ideally-rabbit.ngrok-free.app/webhook/troisecole', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'ngrok-skip-browser-warning': 'true'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        user_id: 'web_' + Date.now(),
+                        timestamp: new Date().toISOString()
+                    })
+                });
+                
+                const data = await response.json();
+                
+                // Remove typing indicator
+                removeTypingIndicator();
+                
+                // Add bot response with formatting
+                let responseContent = data.response || data.message || getSmartResponse(message);
+                
+                // Add rich content if applicable
+                if (message.toLowerCase().includes('menu') || message.toLowerCase().includes('services')) {
+                    responseContent += `
+                        <div style="margin-top: 12px;">
+                            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop" 
+                                 alt="Services" 
+                                 style="width: 100%; border-radius: 12px; margin-bottom: 8px;">
+                            <div style="display: flex; gap: 8px; margin-top: 8px;">
+                                <button onclick="sendSuggestion('Tell me more about DevOps')" 
+                                        style="padding: 6px 12px; background: linear-gradient(135deg, #7C4DFF, #9575CD); 
+                                               border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 12px;">
+                                    Learn More
+                                </button>
+                                <button onclick="sendSuggestion('Schedule a consultation')" 
+                                        style="padding: 6px 12px; background: linear-gradient(135deg, #2EE6D6, #2196F3); 
+                                               border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 12px;">
+                                    Book Now
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                addMessage(responseContent, 'bot');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                removeTypingIndicator();
+                
+                // Provide smart fallback response
+                const fallbackResponse = getSmartResponse(message);
+                addMessage(fallbackResponse, 'bot');
+            }
+        }
+
+        function getSmartResponse(message) {
+            const msg = message.toLowerCase();
+            
+            if (msg.includes('price') || msg.includes('cost')) {
+                return `Our pricing is tailored to your specific needs. We offer:
+                        <br>• Startup Package: Starting from $999/month
+                        <br>• Enterprise Solutions: Custom pricing
+                        <br>• Pay-as-you-grow model
+                        <br><br>📞 Contact us for a personalized quote: +212 640 036 156`;
+            } else if (msg.includes('chatbot') || msg.includes('ai')) {
+                return `Our AI chatbots feature:
+                        <br>• 🧠 Advanced NLP & Machine Learning
+                        <br>• 📸 Rich media support (images, PDFs, links)
+                        <br>• 📊 Analytics & insights dashboard
+                        <br>• 🔄 Memory & context retention
+                        <br>• 🌍 Multi-language support
+                        <br><br>Would you like to see a demo?`;
+            } else if (msg.includes('devops') || msg.includes('cloud')) {
+                return `Our DevOps & Cloud solutions include:
+                        <br>• ☁️ AWS, Azure, GCP deployment
+                        <br>• 🔄 CI/CD pipeline setup
+                        <br>• 📊 Monitoring with Grafana/Prometheus
+                        <br>• 🐳 Docker & Kubernetes orchestration
+                        <br>• 🔒 Security & compliance
+                        <br><br>Let's discuss your infrastructure needs!`;
+            } else if (msg.includes('demo') || msg.includes('meeting')) {
+                return `I'd be happy to schedule a demo for you! 📅
+                        <br><br>Available slots this week:
+                        <br>• Tomorrow at 2:00 PM
+                        <br>• Thursday at 10:00 AM
+                        <br>• Friday at 3:00 PM
+                        <br><br>Or email us at: contact@forgeitops.solutions`;
+            } else {
+                return `Thanks for your message! Our services include:
+                        <br>• 🤖 AI-Powered Chatbots
+                        <br>• 🌐 Modern Web Development
+                        <br>• ☁️ Cloud & DevOps Solutions
+                        <br>• 🚀 Enterprise Infrastructure
+                        <br><br>How can I help you today?`;
+            }
+        }
+
+        function updateSuggestions(message) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            const msg = message.toLowerCase();
+            
+            let newSuggestions = [];
+            
+            if (msg.includes('price') || msg.includes('cost')) {
+                newSuggestions = [
+                    { icon: '💳', text: 'Payment options' },
+                    { icon: '📊', text: 'Compare plans' },
+                    { icon: '🎯', text: 'Enterprise pricing' },
+                    { icon: '📞', text: 'Talk to sales' }
+                ];
+            } else if (msg.includes('chatbot') || msg.includes('ai')) {
+                newSuggestions = [
+                    { icon: '🤖', text: 'Chatbot features' },
+                    { icon: '💼', text: 'Use cases' },
+                    { icon: '🔧', text: 'Integration options' },
+                    { icon: '📈', text: 'ROI calculator' }
+                ];
+            } else if (msg.includes('devops')) {
+                newSuggestions = [
+                    { icon: '☁️', text: 'Cloud platforms' },
+                    { icon: '🐳', text: 'Docker services' },
+                    { icon: '⚙️', text: 'CI/CD setup' },
+                    { icon: '📊', text: 'Monitoring tools' }
+                ];
+            } else {
+                return; // Keep default suggestions
+            }
+            
+            suggestionsContainer.innerHTML = '';
+            newSuggestions.forEach((sugg, index) => {
+                const chip = document.createElement('div');
+                chip.className = 'suggestion-chip';
+                chip.innerHTML = `${sugg.icon} ${sugg.text}`;
+                chip.onclick = () => sendSuggestion(sugg.text);
+                chip.style.animationDelay = `${index * 0.1}s`;
+                suggestionsContainer.appendChild(chip);
+            });
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! We will contact you within 24 hours.');
+            this.reset();
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Advanced scroll effects
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            const scrolled = window.scrollY;
+            
+            if (scrolled > 50) {
+                nav.style.background = 'rgba(13, 13, 13, 0.95)';
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                nav.style.background = 'rgba(13, 13, 13, 0.8)';
+                nav.style.boxShadow = 'none';
+            }
+            
+            // Parallax effect for hero elements
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const badges = document.querySelectorAll('.floating-badge');
+                badges.forEach((badge, index) => {
+                    const speed = 0.5 + (index * 0.1);
+                    badge.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Detect user scroll and show attention grabbers
+        let scrollTimer;
+        window.addEventListener('scroll', () => {
+            if (!hasInteracted && window.scrollY > 200) {
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    const notification = document.getElementById('welcomeNotification');
+                    if (!notification.classList.contains('show')) {
+                        notification.classList.add('show');
+                        playNotificationSound();
+                    }
+                }, 1000);
+            }
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            // Wait a bit before showing attention grabbers
+            setTimeout(() => {
+                initAttentionGrabbers();
+            }, 1500);
+            
+            // Add floating animation to toggle button
+            const toggle = document.querySelector('.chatbot-toggle');
+            let floatDirection = 1;
+            setInterval(() => {
+                if (!chatbotOpen && !hasInteracted) {
+                    const baseTransform = hasInteracted ? '' : 'scale(1.1) ';
+                    toggle.style.transform = `${baseTransform}translateY(${floatDirection * 5}px)`;
+                    floatDirection *= -1;
+                }
+            }, 2000);
+            
+            // Check if user is idle and show more prompts
+            let idleTime = 0;
+            setInterval(() => {
+                idleTime++;
+                if (idleTime > 10 && !hasInteracted && !chatbotOpen) {
+                    // User has been idle for 10 seconds
+                    const toggle = document.querySelector('.chatbot-toggle');
+                    toggle.style.animation = 'shake 0.5s ease';
+                    setTimeout(() => {
+                        toggle.style.animation = '';
+                    }, 500);
+                }
+            }, 1000);
+            
+            // Reset idle time on any interaction
+            document.addEventListener('mousemove', () => idleTime = 0);
+            document.addEventListener('keypress', () => idleTime = 0);
+            
+            // Simulate incoming message notification
+            setTimeout(() => {
+                if (!chatbotOpen && !hasInteracted) {
+                    const badge = document.querySelector('.notification-badge');
+                    badge.style.display = 'flex';
+                    badge.style.animation = 'bounce 0.5s ease';
+                }
+            }, 5000);
+        });
+
+        // Add exit intent detection
+        document.addEventListener('mouseout', (e) => {
+            if (!hasInteracted && e.clientY <= 0) {
+                // User is about to leave the page
+                const notification = document.getElementById('welcomeNotification');
+                notification.textContent = "🎁 Wait! Get a FREE consultation!";
+                notification.classList.add('show');
+                notification.style.background = 'linear-gradient(135deg, #FF5252, #FF1744)';
+                playNotificationSound();
+            }
+        });
+    </script>
+</body>
+</html>
