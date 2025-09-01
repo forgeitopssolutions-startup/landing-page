@@ -5,13 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ForgeItOps - Premium IT Solutions for Web, AI, and Cloud</title>
     <meta name="description" content="Enterprise-grade DevOps solutions, AI-powered chatbots, and modern website creation. Transform your business with ForgeItOps.">
-    
+      <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Enterprise-grade DevOps solutions, AI-powered chatbots, and modern website creation. Transform your business with ForgeItOps.">
+   
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    
+  
+
     <style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#0D0D0D; color:#FFF; overflow:hidden; }
+
+
+
+  /* FULLSCREEN INTRO */
+  #intro {
+    position: fixed;
+    inset: 0;
+    background: #0D0D0D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 800px;
+    z-index: 10000;
+    overflow: hidden; /* locks scroll until we remove it */
+  }
+  #intro h1 {
+    font-size: 6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transform: rotateX(90deg) translateY(150px);
+    opacity: 0;
+    animation: entryRotate 2s ease-out 1s forwards;
+  }
+  #intro p {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    transform: translateY(60px);
+    opacity: 0;
+    animation: entryFade 1.5s ease-out 3s forwards;
+  }
+
+  @keyframes entryRotate {
+    0%   { transform: rotateX(90deg) translateY(150px); opacity: 0; }
+    70%  { transform: rotateX(-10deg) translateY(0);   opacity: 1; }
+    100% { transform: rotateX(0deg)  translateY(0);   opacity: 1; }
+  }
+  @keyframes entryFade {
+    from { transform: translateY(60px); opacity: 0; }
+    to   { transform: translateY(0);   opacity: 1; }
+  }
+
+  #intro.fade-out {
+  animation: fadeOutOverlay 1s ease-in-out forwards;
+}
+  @keyframes fadeOutOverlay {
+    from { opacity: 1; }
+    to   { opacity: 0; visibility: hidden; }
+  }
+
+
         :root {
             --primary-gradient-start: #7C4DFF;
             --primary-gradient-end: #9575CD;
@@ -38,11 +103,14 @@
             scroll-behavior: smooth;
         }
 
+
+
+
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--dark-base);
             color: var(--white);
-            overflow-x: hidden;
             line-height: 1.6;
         }
 
@@ -2484,6 +2552,12 @@
     </style>
 </head>
 <body>
+
+    <div id="intro">
+        <h1>ForgeItOps</h1>
+        <p>Premium IT Solutions for Web, AI & Cloud</p>
+      </div>
+
     <!-- Loading Screen -->
     <div class="loading-screen">
         <div class="loader"></div>
@@ -3389,12 +3463,39 @@
     </div>
 
     <script>
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelector('.loading-screen').classList.add('hide');
-            }, 1500);
-        });
+
+
+
+
+window.addEventListener('load', () => {
+  // 1) Hide legacy loader
+  setTimeout(() => {
+    document.querySelector('.loading-screen')?.classList.add('hide');
+  }, 1500);
+
+  // 2) Animate intro in full, then fade out
+  //    (1s delay + 2s headline + 1.5s subtitle = 4.5s)
+  setTimeout(() => {
+    const intro = document.getElementById('intro');
+    intro?.classList.add('fade-out');
+    intro?.addEventListener('animationend', () => {
+      intro.remove();
+      document.body.classList.add('allow-scroll');
+    }, { once: true });
+  }, 4500);
+});
+
+
+
+
+
+
+      // After the fade-out completes, remove the overlay
+  intro.addEventListener('animationend', () => {
+    intro.remove();
+    // Ensure scrolling is back on
+    document.body.style.overflow = 'auto';
+  }, { once: true });
 
         // Particle Effect
         function createParticles() {
