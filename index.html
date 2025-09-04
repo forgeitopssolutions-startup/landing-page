@@ -6,6 +6,8 @@
     <title>ForgeItOps - Premium IT Solutions for Web, AI, and Cloud</title>
     <meta name="description" content="Enterprise-grade DevOps solutions, AI-powered chatbots, and modern website creation. Transform your business with ForgeItOps.">
       <!-- Favicon -->
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta name="description" content="Enterprise-grade DevOps solutions, AI-powered chatbots, and modern website creation. Transform your business with ForgeItOps.">
    
@@ -19,7 +21,7 @@
 
     <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Inter',sans-serif; background:#0D0D0D; color:#FFF; overflow:hidden; }
+body { font-family:'Inter',sans-serif; background:#df1313; color:#FFF; overflow:hidden; }
 
 
 
@@ -915,24 +917,12 @@ body { font-family:'Inter',sans-serif; background:#0D0D0D; color:#FFF; overflow:
             margin-bottom: 24px;
         }
 
-        .service-logs {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            overflow-x: auto;
-        }
 
-        .log-line {
-            margin: 4px 0;
-            opacity: 0.9;
-        }
 
-        .log-success { color: #00ff00; }
-        .log-info { color: #2EE6D6; }
-        .log-warning { color: #ffbd2e; }
+
+/* Log lines styling */
+
+/* TERMINAL LOGS - WORKING VERSION */
 
         /* Why ForgeItOps Section */
         .why-section {
@@ -2472,8 +2462,748 @@ body { font-family:'Inter',sans-serif; background:#0D0D0D; color:#FFF; overflow:
                 bottom: 20px;
                 right: 20px;
             }
+
+
+            /* Add this to your existing styles */
+.message-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.bot .message-header {
+    justify-content: flex-start;
+}
+
+.audio-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(124, 77, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.audio-icon:hover {
+    background: rgba(124, 77, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.user .audio-icon {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.audio-player {
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 12px;
+    height: 30px;
+}
+
+.audio-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #7C4DFF;
+    animation: spin 1s linear infinite;
+}
+
+
         }
+
+
+
+        /* MOBILE RESPONSIVE FIXES - ADD THIS AT THE END */
+
+/* Fix invisible text on white backgrounds */
+.about,
+.services,
+.use-cases,
+.contact {
+    color: #212121 !important;
+}
+
+.about *,
+.services *,
+.use-cases *,
+.contact * {
+    color: #212121 !important;
+}
+
+.about p,
+.services p,
+.use-cases p,
+.contact p,
+.use-case-text p,
+.contact-info p {
+    color: #444444 !important;
+}
+
+/* Mobile Navigation */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+    .hero-content,
+    .about-content,
+    .chatbot-features,
+    .contact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        text-align: center;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .floating-badge {
+        display: none !important;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    /* Show mobile menu button */
+    .mobile-menu-toggle {
+        display: block !important;
+    }
+    
+    /* Hide desktop navigation */
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(13, 13, 13, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Container padding */
+    .container {
+        padding: 0 16px !important;
+    }
+    
+    /* Hero section */
+    .hero {
+        padding-top: 120px !important;
+        min-height: auto !important;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        text-align: center !important;
+    }
+    
+    .hero-buttons {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 16px !important;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100% !important;
+        max-width: 300px !important;
+        justify-content: center !important;
+    }
+    
+    /* All sections */
+    .about,
+    .chatbot-section,
+    .services,
+    .why-section,
+    .use-cases,
+    .testimonials,
+    .contact {
+        padding: 80px 0 !important;
+    }
+    
+    /* Grid layouts */
+    .about-content,
+    .chatbot-features,
+    .contact-grid,
+    .use-case-content.active {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        text-align: center !important;
+    }
+    
+    .values-grid,
+    .services-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    /* Use cases tabs */
+    .use-cases-tabs {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Forms */
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    
+    .contact-form {
+        padding: 32px 24px !important;
+    }
+    
+    /* Footer */
+    .footer-content {
+        flex-direction: column !important;
+        gap: 30px !important;
+        text-align: center !important;
+    }
+    
+    .footer-links {
+        gap: 20px !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+    }
+    
+    /* Chatbot mobile */
+    .chatbot-window {
+        width: calc(100vw - 20px) !important;
+        height: calc(100vh - 40px) !important;
+        right: 10px !important;
+        bottom: 10px !important;
+        border-radius: 16px !important;
+    }
+    
+    .welcome-notification {
+        right: 20px !important;
+        bottom: 90px !important;
+        max-width: calc(100vw - 40px) !important;
+    }
+    
+    /* Showcase window */
+    .showcase-window {
+        transform: none !important;
+    }
+    
+    .showcase-messages {
+        height: 300px !important;
+        padding: 16px !important;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .chatbot-toggle {
+        width: 60px !important;
+        height: 60px !important;
+        bottom: 15px !important;
+        right: 15px !important;
+    }
+    
+    .chatbot-window {
+        width: calc(100vw - 10px) !important;
+        height: calc(100vh - 20px) !important;
+        right: 5px !important;
+        bottom: 5px !important;
+    }
+    
+    .hero {
+        padding-top: 100px !important;
+    }
+    
+    .showcase-messages {
+        height: 250px !important;
+    }
+}
+
+/* Fix text sizes for mobile */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px !important;
+    }
+    
+    h1 { font-size: 28px !important; }
+    h2 { font-size: 24px !important; }
+    h3 { font-size: 20px !important; }
+    h4 { font-size: 18px !important; }
+    
+    .section-title {
+        font-size: 28px !important;
+    }
+    
+    .section-subtitle {
+        font-size: 16px !important;
+    }
+
+
+
+
+}
+
+
+
+/* Terminal Animation Styles */
+.animated-terminal {
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-terminal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(124, 77, 255, 0.1), transparent);
+    animation: terminalScan 3s ease-in-out infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes terminalScan {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* Terminal Line Typing Animation */
+.terminal-line {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: typeInLine 0.8s ease-out forwards;
+    position: relative;
+}
+
+/* Staggered animation delays for each terminal */
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(1) { animation-delay: 0.5s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(2) { animation-delay: 1s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(3) { animation-delay: 1.5s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(4) { animation-delay: 2s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(5) { animation-delay: 2.5s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(6) { animation-delay: 3s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(7) { animation-delay: 3.5s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(8) { animation-delay: 4s; }
+.animated-terminal:nth-of-type(1) .terminal-line:nth-child(9) { animation-delay: 4.5s; }
+
+/* Different delays for each service card */
+.service-card:nth-child(2) .terminal-line:nth-child(1) { animation-delay: 0.3s; }
+.service-card:nth-child(2) .terminal-line:nth-child(2) { animation-delay: 0.8s; }
+.service-card:nth-child(2) .terminal-line:nth-child(3) { animation-delay: 1.3s; }
+.service-card:nth-child(2) .terminal-line:nth-child(4) { animation-delay: 1.8s; }
+.service-card:nth-child(2) .terminal-line:nth-child(5) { animation-delay: 2.3s; }
+.service-card:nth-child(2) .terminal-line:nth-child(6) { animation-delay: 2.8s; }
+.service-card:nth-child(2) .terminal-line:nth-child(7) { animation-delay: 3.3s; }
+.service-card:nth-child(2) .terminal-line:nth-child(8) { animation-delay: 3.8s; }
+.service-card:nth-child(2) .terminal-line:nth-child(9) { animation-delay: 4.3s; }
+
+.service-card:nth-child(3) .terminal-line:nth-child(1) { animation-delay: 0.4s; }
+.service-card:nth-child(3) .terminal-line:nth-child(2) { animation-delay: 0.9s; }
+.service-card:nth-child(3) .terminal-line:nth-child(3) { animation-delay: 1.4s; }
+.service-card:nth-child(3) .terminal-line:nth-child(4) { animation-delay: 1.9s; }
+.service-card:nth-child(3) .terminal-line:nth-child(5) { animation-delay: 2.4s; }
+.service-card:nth-child(3) .terminal-line:nth-child(6) { animation-delay: 2.9s; }
+.service-card:nth-child(3) .terminal-line:nth-child(7) { animation-delay: 3.4s; }
+.service-card:nth-child(3) .terminal-line:nth-child(8) { animation-delay: 3.9s; }
+
+.service-card:nth-child(4) .terminal-line:nth-child(1) { animation-delay: 0.6s; }
+.service-card:nth-child(4) .terminal-line:nth-child(2) { animation-delay: 1.1s; }
+.service-card:nth-child(4) .terminal-line:nth-child(3) { animation-delay: 1.6s; }
+.service-card:nth-child(4) .terminal-line:nth-child(4) { animation-delay: 2.1s; }
+.service-card:nth-child(4) .terminal-line:nth-child(5) { animation-delay: 2.6s; }
+.service-card:nth-child(4) .terminal-line:nth-child(6) { animation-delay: 3.1s; }
+.service-card:nth-child(4) .terminal-line:nth-child(7) { animation-delay: 3.6s; }
+.service-card:nth-child(4) .terminal-line:nth-child(8) { animation-delay: 4.1s; }
+
+@keyframes typeInLine {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateX(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Blinking Cursor Effect */
+.terminal-line::after {
+    content: '▋';
+    color: #00ff00;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+    opacity: 0;
+}
+
+.terminal-line:last-child::after {
+    opacity: 1;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Hover Effects for Terminals */
+.animated-terminal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(124, 77, 255, 0.2) !important;
+    transition: all 0.3s ease;
+}
+
+.animated-terminal:hover::before {
+    animation-duration: 1.5s;
+}
+
+/* Terminal Window Controls Animation */
+.animated-terminal .terminal-controls {
+    animation: fadeInControls 1s ease 0.2s both;
+}
+
+@keyframes fadeInControls {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Success/Error Line Glow Effects */
+.terminal-line[style*="color: #00ff00"] {
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+.terminal-line[style*="color: #ffa500"] {
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.3);
+}
+
+.terminal-line[style*="color: #00bfff"] {
+    text-shadow: 0 0 5px rgba(0, 191, 255, 0.3);
+}
+
+/* Mobile Responsive Animations */
+@media (max-width: 768px) {
+    .animated-terminal::before {
+        animation: none;
+    }
+    
+    .terminal-line {
+        animation-duration: 0.4s;
+    }
+    
+    .service-card:nth-child(n) .terminal-line:nth-child(1) { animation-delay: 0.1s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(2) { animation-delay: 0.2s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(3) { animation-delay: 0.3s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(4) { animation-delay: 0.4s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(5) { animation-delay: 0.5s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(6) { animation-delay: 0.6s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(7) { animation-delay: 0.7s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(8) { animation-delay: 0.8s; }
+    .service-card:nth-child(n) .terminal-line:nth-child(9) { animation-delay: 0.9s; }
+}
+
+/* Intersection Observer Animation (Optional - for scroll-triggered animations) */
+.animated-terminal.in-view .terminal-line {
+    animation-play-state: running;
+}
+
+.animated-terminal:not(.in-view) .terminal-line {
+    animation-play-state: paused;
+}
+
+
+
+.service-logs {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    font-family: 'Courier New', 'Monaco', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    border: 2px solid #dd0909 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 150px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.log-line {
+    display: block !important;
+    margin: 8px 0 !important;
+    padding: 2px 0 !important;
+    color: #ffffff !important;
+    font-family: 'Courier New', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    white-space: pre-wrap !important;
+}
+
+.log-success { 
+    color: #00ff00 !important; 
+    font-weight: normal !important;
+}
+
+.log-info { 
+    color: #00bfff !important; 
+    font-weight: normal !important;
+}
+
+.log-warning { 
+    color: #ffaa00 !important; 
+    font-weight: normal !important;
+}
+
+.log-error {
+    color: #ff4444 !important;
+    font-weight: normal !important;
+}
+
+
+
+/* Scrollbar styling for terminal */
+.service-logs::-webkit-scrollbar {
+    height: 6px !important;
+}
+
+.service-logs::-webkit-scrollbar-track {
+    background: #e90d0d !important;
+}
+
+.service-logs::-webkit-scrollbar-thumb {
+    background: #df0505 !important;
+    border-radius: 3px !important;
+}
+
+/* Mobile responsive for terminal */
+@media (max-width: 768px) {
+    .service-logs {
+        font-size: 11px !important;
+        padding: 15px !important;
+        padding-top: 30px !important;
+    }
+    
+    .service-logs::before {
+        top: 6px !important;
+        left: 12px !important;
+        font-size: 10px !important;
+    }
+}
+
+
+/* Terminal Animation Styles - COMPLETE */
+.terminal-container {
+    transition: all 0.3s ease !important;
+}
+
+.terminal-container:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3) !important;
+}
+
+/* Scanning Line Animation */
+.scan-line {
+    animation: scanAnimation 4s ease-in-out infinite !important;
+}
+
+@keyframes scanAnimation {
+    0% { left: -100% !important; }
+    50% { left: 100% !important; }
+    100% { left: 100% !important; }
+}
+
+/* Terminal Dots Pulse */
+.terminal-dot {
+    transition: all 0.3s ease !important;
+}
+
+.terminal-container:hover .terminal-dot:nth-child(1) {
+    box-shadow: 0 0 10px #ff5f56 !important;
+}
+
+.terminal-container:hover .terminal-dot:nth-child(2) {
+    box-shadow: 0 0 10px #ffbd2e !important;
+}
+
+.terminal-container:hover .terminal-dot:nth-child(3) {
+    box-shadow: 0 0 10px #27ca3f !important;
+}
+
+/* Terminal Line Typing Animation */
+.terminal-line {
+    animation: typeIn 0.8s ease-out forwards !important;
+}
+
+/* Service Card 1 Animation Delays */
+.service-card:nth-child(1) .terminal-line:nth-child(1) { animation-delay: 0.5s !important; }
+.service-card:nth-child(1) .terminal-line:nth-child(2) { animation-delay: 1s !important; }
+.service-card:nth-child(1) .terminal-line:nth-child(3) { animation-delay: 1.5s !important; }
+.service-card:nth-child(1) .terminal-line:nth-child(4) { animation-delay: 2s !important; }
+.service-card:nth-child(1) .terminal-line:nth-child(5) { animation-delay: 2.5s !important; }
+.service-card:nth-child(1) .terminal-line:nth-child(6) { animation-delay: 3s !important; }
+
+/* Service Card 2 Animation Delays */
+.service-card:nth-child(2) .terminal-line:nth-child(1) { animation-delay: 0.3s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(2) { animation-delay: 0.8s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(3) { animation-delay: 1.3s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(4) { animation-delay: 1.8s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(5) { animation-delay: 2.3s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(6) { animation-delay: 2.8s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(7) { animation-delay: 3.3s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(8) { animation-delay: 3.8s !important; }
+.service-card:nth-child(2) .terminal-line:nth-child(9) { animation-delay: 4.3s !important; }
+
+/* Service Card 3 Animation Delays */
+.service-card:nth-child(3) .terminal-line:nth-child(1) { animation-delay: 0.4s !important; }
+.service-card:nth-child(3) .terminal-line:nth-child(2) { animation-delay: 0.9s !important; }
+.service-card:nth-child(3) .terminal-line:nth-child(3) { animation-delay: 1.4s !important; }
+.service-card:nth-child(3) .terminal-line:nth-child(4) { animation-delay: 1.9s !important; }
+.service-card:nth-child(3) .terminal-line:nth-child(5) { animation-delay: 2.4s !important; }
+.service-card:nth-child(3) .terminal-line:nth-child(6) { animation-delay: 2.9s !important; }
+.service-card:nth-child(3) .terminal-line:nth-child(7) { animation-delay: 3.4s !important; }
+.service-card:nth-child(3) .terminal-line:nth-child(8) { animation-delay: 3.9s !important; }
+
+/* Service Card 4 Animation Delays */
+.service-card:nth-child(4) .terminal-line:nth-child(1) { animation-delay: 0.6s !important; }
+.service-card:nth-child(4) .terminal-line:nth-child(2) { animation-delay: 1.1s !important; }
+.service-card:nth-child(4) .terminal-line:nth-child(3) { animation-delay: 1.6s !important; }
+.service-card:nth-child(4) .terminal-line:nth-child(4) { animation-delay: 2.1s !important; }
+.service-card:nth-child(4) .terminal-line:nth-child(5) { animation-delay: 2.6s !important; }
+.service-card:nth-child(4) .terminal-line:nth-child(6) { animation-delay: 3.1s !important; }
+.service-card:nth-child(4) .terminal-line:nth-child(7) { animation-delay: 3.6s !important; }
+.service-card:nth-child(4) .terminal-line:nth-child(8) { animation-delay: 4.1s !important; }
+
+@keyframes typeIn {
+    0% {
+        opacity: 0 !important;
+        transform: translateX(-20px) !important;
+    }
+    50% {
+        opacity: 0.7 !important;
+        transform: translateX(-5px) !important;
+    }
+    100% {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+    }
+}
+
+/* Blinking Cursor */
+.cursor {
+    animation: blink 1s infinite !important;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1 !important; }
+    51%, 100% { opacity: 0 !important; }
+}
+
+/* Text Glow Effects */
+.terminal-line[style*="color: #00ff00"] {
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5) !important;
+}
+
+.terminal-line[style*="color: #ffa500"] {
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.5) !important;
+}
+
+.terminal-line[style*="color: #00bfff"] {
+    text-shadow: 0 0 5px rgba(0, 191, 255, 0.5) !important;
+}
+
+/* Hover Glow Enhancement */
+.terminal-container:hover .terminal-line {
+    text-shadow: 0 0 8px currentColor !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .scan-line {
+        animation: none !important;
+    }
+    
+    .terminal-line {
+        animation-duration: 0.4s !important;
+    }
+    
+    .service-card:nth-child(n) .terminal-line:nth-child(1) { animation-delay: 0.1s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(2) { animation-delay: 0.2s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(3) { animation-delay: 0.3s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(4) { animation-delay: 0.4s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(5) { animation-delay: 0.5s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(6) { animation-delay: 0.6s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(7) { animation-delay: 0.7s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(8) { animation-delay: 0.8s !important; }
+    .service-card:nth-child(n) .terminal-line:nth-child(9) { animation-delay: 0.9s !important; }
+}
     </style>
+
+
+
 </head>
 <body>
 
@@ -2498,7 +3228,6 @@ body { font-family:'Inter',sans-serif; background:#0D0D0D; color:#FFF; overflow:
                     <a href="#technology">Technology</a>
                     <a href="#services">Services</a>
                     <a href="#use-cases">Use Cases</a>
-                    <a href="#testimonials">Reviews</a>
                     <a href="#contact" class="nav-cta">Get Started</a>
                 </div>
             </div>
@@ -2601,485 +3330,656 @@ body { font-family:'Inter',sans-serif; background:#0D0D0D; color:#FFF; overflow:
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">About Us</span>
-                <h2 class="section-title">Building the Future of Digital Infrastructure</h2>
-                <p class="section-subtitle">Founded by Imad & Khawla, ForgeItOps is powered by a global team of developers and AI data engineers passionate about building cutting-edge solutions.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Transforming Businesses Through Technology</h3>
-                    <p>At ForgeItOps, we don't just build solutions – we forge partnerships that drive digital transformation. Our expertise spans from intelligent AI systems to robust cloud infrastructure, all designed to scale with your ambitions.</p>
-                    <p>With a foundation built on innovation, reliability, and scalability, we empower businesses worldwide to achieve their full potential in the digital age.</p>
-                    <div class="values-grid">
-                        <div class="value-card">
-                            <div class="value-icon">💡</div>
-                            <h4>Innovation</h4>
-                            <p>Cutting-edge solutions that push boundaries</p>
-                        </div>
-                        <div class="value-card">
-                            <div class="value-icon">🔒</div>
-                            <h4>Reliability</h4>
-                            <p>99.9% uptime guaranteed infrastructure</p>
-                        </div>
-                        <div class="value-card">
-                            <div class="value-icon">📈</div>
-                            <h4>Scalability</h4>
-                            <p>Grow without limits or constraints</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="team-illustration">
-                        <div style="text-align: center;">
-                            <div style="font-size: 80px; margin-bottom: 20px;">🌐</div>
-                            <h3 style="color: var(--heading-dark); margin-bottom: 16px;">Global Team Excellence</h3>
-                            <p style="color: var(--body-text);">Developers, AI Engineers, and DevOps Experts working 24/7 to deliver exceptional solutions</p>
-                            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
-                                <div style="font-size: 40px;">👨‍💻</div>
-                                <div style="font-size: 40px;">👩‍💻</div>
-                                <div style="font-size: 40px;">🤖</div>
-                                <div style="font-size: 40px;">☁️</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Chatbot Technology Section -->
-    <section class="chatbot-section" id="technology">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label" style="background: linear-gradient(135deg, var(--neon-aqua), var(--electric-blue)); color: white;">AI Technology</span>
-                <h2 class="section-title" style="color: white;">Our Chatbot Technology</h2>
-                <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Next-generation AI chatbots with advanced capabilities</p>
-            </div>
-            <div class="chatbot-features">
-                <div class="features-list">
-                    <div class="feature-item">
-                        <div class="feature-icon">🧠</div>
-                        <div class="feature-text">
-                            <h4>Domain-Specific Answers (RAG)</h4>
-                            <p>Advanced retrieval-augmented generation for accurate, contextual responses tailored to your industry</p>
+
+      
+    
+
+ <!-- Services Section - WORKING VERSION -->
+<section class="services" id="services">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Our Services</span>
+            <h2 class="section-title">Enterprise Solutions That Scale</h2>
+            <p class="section-subtitle">From concept to deployment, we deliver end-to-end technology solutions</p>
+        </div>
+        <div class="services-grid">
+            
+            <!-- Service Card 1 -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">🎨</div>
+                </div>
+                <div class="service-content">
+                    <h3>Website Design & Development</h3>
+                    <p>Modern, responsive websites built with React, Next.js, and cutting-edge technologies. Optimized for performance and user experience.</p>
+                    
+                    <!-- SIMPLE WORKING TERMINAL -->
+                    <div style="background: #1a1a1a !important; color: #ffffff !important; padding: 0 !important; border-radius: 12px !important; font-family: 'Courier New', monospace !important; margin-top: 20px !important; border: 2px solid #333 !important; overflow: hidden !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;">
+                        <!-- Terminal Header -->
+                        <div style="background: #2d2d2d !important; padding: 12px 16px !important; border-bottom: 1px solid #404040 !important; display: flex !important; align-items: center !important;">
+                            <div style="display: flex !important; gap: 8px !important;">
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ff5f56 !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ffbd2e !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #27ca3f !important;"></div>
+                            </div>
+                            <div style="color: #ffffff !important; font-size: 12px !important; margin-left: 15px !important; opacity: 0.8 !important;">Web Development Terminal</div>
                         </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📸</div>
-                        <div class="feature-text">
-                            <h4>Rich Media Support</h4>
-                            <p>Send pictures, menus, links, PDFs, and multimedia content seamlessly to enhance user experience</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">📅</div>
-                        <div class="feature-text">
-                            <h4>Automate Reservations & Database Logging</h4>
-                            <p>Automatically handle bookings, appointments, and log all interactions into your database</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">💾</div>
-                        <div class="feature-text">
-                            <h4>Memory Database Integration</h4>
-                            <p>Recall past discussions and maintain context across conversations for personalized experiences</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">🏢</div>
-                        <div class="feature-text">
-                            <h4>Industry Adaptable</h4>
-                            <p>Perfect for restaurants, healthcare, education, startups, and enterprise businesses</p>
+                        <!-- Terminal Content -->
+                        <div style="padding: 20px !important;">
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ npm run build</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Build optimized (2.4s)</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ SEO score: 100/100</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Performance: 98/100</div>
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ vercel deploy --prod</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Deployed to production</div>
                         </div>
                     </div>
                 </div>
-                <div class="chatbot-demo">
-                    <div class="chat-widget-preview">
-                        <div class="showcase-header">
-                            <div class="chatbot-avatar">🤖</div>
-                            <div class="chatbot-status">
-                                <h4>Smart Features Demo</h4>
-                                <span>See our chatbot capabilities in action</span>
+            </div>
+
+            <!-- Service Card 2 -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">🤖</div>
+                </div>
+                <div class="service-content">
+                    <h3>AI Chatbots & Automation</h3>
+                    <p>Intelligent conversational AI with NLP, machine learning, and custom training. RAG-powered responses with memory and multi-platform integration.</p>
+                    
+                    <!-- SIMPLE WORKING TERMINAL -->
+                    <div style="background: #1a1a1a !important; color: #ffffff !important; padding: 0 !important; border-radius: 12px !important; font-family: 'Courier New', monospace !important; margin-top: 20px !important; border: 2px solid #333 !important; overflow: hidden !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;">
+                        <!-- Terminal Header -->
+                        <div style="background: #2d2d2d !important; padding: 12px 16px !important; border-bottom: 1px solid #404040 !important; display: flex !important; align-items: center !important;">
+                            <div style="display: flex !important; gap: 8px !important;">
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ff5f56 !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ffbd2e !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #27ca3f !important;"></div>
+                            </div>
+                            <div style="color: #ffffff !important; font-size: 12px !important; margin-left: 15px !important; opacity: 0.8 !important;">AI Model Terminal</div>
+                        </div>
+                        <!-- Terminal Content -->
+                        <div style="padding: 20px !important;">
+                            <div style="color: #00bfff !important; margin: 8px 0 !important; font-size: 14px !important;">$ python ai_chatbot.py --model gpt-4</div>
+                            <div style="color: #ffa500 !important; margin: 8px 0 !important; font-size: 14px !important;">Loading model weights...</div>
+                            <div style="color: #00ff00 !important; margin: 8px 0 !important; font-size: 14px !important;">✓ GPT-4 model loaded successfully</div>
+                            <div style="color: #00ff00 !important; margin: 8px 0 !important; font-size: 14px !important;">✓ RAG database connected (10k+ documents)</div>
+                            <div style="color: #00ff00 !important; margin: 8px 0 !important; font-size: 14px !important;">✓ Memory system initialized</div>
+                            <div style="color: #00bfff !important; margin: 8px 0 !important; font-size: 14px !important;">$ curl -X POST /api/chat</div>
+                            <div style="color: #ffa500 !important; margin: 8px 0 !important; font-size: 14px !important;">Processing query with context...</div>
+                            <div style="color: #00ff00 !important; margin: 8px 0 !important; font-size: 14px !important;">✓ Response generated (0.8s)</div>
+                            <div style="color: #00ff00 !important; margin: 8px 0 !important; font-size: 14px !important;">✓ API endpoint ready on port 8000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Card 3 -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">☁️</div>
+                </div>
+                <div class="service-content">
+                    <h3>Cloud Infrastructure & DevOps</h3>
+                    <p>Scalable cloud architecture on AWS, Azure, and GCP. Complete CI/CD pipelines, Infrastructure as Code, and 24/7 monitoring solutions.</p>
+                    
+                    <!-- SIMPLE WORKING TERMINAL -->
+                    <div style="background: #1a1a1a !important; color: #ffffff !important; padding: 0 !important; border-radius: 12px !important; font-family: 'Courier New', monospace !important; margin-top: 20px !important; border: 2px solid #333 !important; overflow: hidden !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;">
+                        <!-- Terminal Header -->
+                        <div style="background: #2d2d2d !important; padding: 12px 16px !important; border-bottom: 1px solid #404040 !important; display: flex !important; align-items: center !important;">
+                            <div style="display: flex !important; gap: 8px !important;">
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ff5f56 !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ffbd2e !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #27ca3f !important;"></div>
+                            </div>
+                            <div style="color: #ffffff !important; font-size: 12px !important; margin-left: 15px !important; opacity: 0.8 !important;">Cloud Operations</div>
+                        </div>
+                        <!-- Terminal Content -->
+                        <div style="padding: 20px !important;">
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ terraform plan</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Infrastructure plan validated</div>
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ kubectl apply -f deployment.yaml</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ 15 pods deployed successfully</div>
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ aws cloudformation deploy</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Stack deployed to us-east-1</div>
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ prometheus --config.file=config.yml</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Monitoring active (99.9% uptime)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Card 4 -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-icon">⚙️</div>
+                </div>
+                <div class="service-content">
+                    <h3>Enterprise DevOps Automation</h3>
+                    <p>Complete DevOps transformation with Jenkins, GitHub Actions, Docker, and Kubernetes. Automated testing, deployment, and monitoring at scale.</p>
+                    
+                    <!-- SIMPLE WORKING TERMINAL -->
+                    <div style="background: #1a1a1a !important; color: #ffffff !important; padding: 0 !important; border-radius: 12px !important; font-family: 'Courier New', monospace !important; margin-top: 20px !important; border: 2px solid #333 !important; overflow: hidden !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;">
+                        <!-- Terminal Header -->
+                        <div style="background: #2d2d2d !important; padding: 12px 16px !important; border-bottom: 1px solid #404040 !important; display: flex !important; align-items: center !important;">
+                            <div style="display: flex !important; gap: 8px !important;">
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ff5f56 !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #ffbd2e !important;"></div>
+                                <div style="width: 12px !important; height: 12px !important; border-radius: 50% !important; background: #27ca3f !important;"></div>
+                            </div>
+                            <div style="color: #ffffff !important; font-size: 12px !important; margin-left: 15px !important; opacity: 0.8 !important;">DevOps Pipeline</div>
+                        </div>
+                        <!-- Terminal Content -->
+                        <div style="padding: 20px !important;">
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ git push origin main</div>
+                            <div style="color: #ffa500 !important; margin: 6px 0 !important; font-size: 13px !important;">Triggering CI/CD pipeline...</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Tests passed (47/47)</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Docker image built & pushed</div>
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ helm upgrade production ./charts</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ Zero-downtime deployment complete</div>
+                            <div style="color: #00bfff !important; margin: 6px 0 !important; font-size: 13px !important;">$ grafana-cli admin stats</div>
+                            <div style="color: #00ff00 !important; margin: 6px 0 !important; font-size: 13px !important;">✓ All systems operational (100% health)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+<section class="chatbot-section" id="technology">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" style="background: linear-gradient(135deg, var(--neon-aqua), var(--electric-blue)); color: white;">AI Technology</span>
+            <h2 class="section-title" style="color: white;">Our Chatbot Technology</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Next-generation AI chatbots with advanced capabilities</p>
+        </div>
+        <div class="chatbot-features">
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🧠</div>
+                    <div class="feature-text">
+                        <h4>Domain-Specific Answers (RAG)</h4>
+                        <p>Advanced retrieval-augmented generation for accurate, contextual responses tailored to your industry</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📸</div>
+                    <div class="feature-text">
+                        <h4>Rich Media Support</h4>
+                        <p>Send pictures, menus, links, PDFs, and multimedia content seamlessly to enhance user experience</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-text">
+                        <h4>Automate Reservations & Database Logging</h4>
+                        <p>Automatically handle bookings, appointments, and log all interactions into your database</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💾</div>
+                    <div class="feature-text">
+                        <h4>Memory Database Integration</h4>
+                        <p>Recall past discussions and maintain context across conversations for personalized experiences</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏢</div>
+                    <div class="feature-text">
+                        <h4>Industry Adaptable</h4>
+                        <p>Perfect for restaurants, healthcare, education, startups, and enterprise businesses</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-demo">
+                <div class="chat-widget-preview">
+                    <div class="showcase-header">
+                        <div class="chatbot-avatar">🤖</div>
+                        <div class="chatbot-status">
+                            <h4>Smart Features Demo</h4>
+                            <span>See our chatbot capabilities in action</span>
+                        </div>
+                    </div>
+                    <div class="showcase-messages" style="height: 500px;">
+                        <div class="demo-message bot">
+                            <div class="demo-bubble">
+                                Welcome! I can help you with:
+                                <br>📷 Share images and documents
+                                <br>📊 Access real-time data
+                                <br>📅 Book appointments
+                                <br>💬 Remember our past conversations
                             </div>
                         </div>
-                        <div class="showcase-messages" style="height: 500px;">
-                            <div class="demo-message bot">
-                                <div class="demo-bubble">
-                                    Welcome! I can help you with:
-                                    <br>📷 Share images and documents
-                                    <br>📊 Access real-time data
-                                    <br>📅 Book appointments
-                                    <br>💬 Remember our past conversations
+                        <div class="demo-message user">
+                            <div class="demo-bubble">
+                                Show me the restaurant menu
+                            </div>
+                        </div>
+                        <div class="demo-message bot">
+                            <div class="demo-bubble">
+                                Here's our menu for today! 
+                                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" alt="Food Menu" class="demo-image">
+                                <div class="demo-buttons">
+                                    <button class="demo-button">📅 Reserve Table</button>
+                                    <button class="demo-button">📱 View PDF</button>
                                 </div>
                             </div>
-                            <div class="demo-message user">
-                                <div class="demo-bubble">
-                                    Show me the restaurant menu
-                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About Section -->
+<!-- About Section -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">About ForgeItOps</span>
+            <h2 class="section-title">Modern DevOps Solutions for Growing Businesses</h2>
+            <p class="section-subtitle">Founded by Imad & Khawla, we're a passionate startup specializing in cloud infrastructure, DevOps automation, and 24/7 monitoring solutions.</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+
+                <h3>Your Dedicated DevOps Team</h3>
+<p>We're a young, agile team passionate about automating everything. Our founders combine years of hands-on DevOps experience with fresh perspectives on modern deployment practices. We bring enterprise-grade automation and monitoring to businesses of all sizes.</p>
+<p>We transform how teams ship code - from automating your entire deployment pipeline to implementing intelligent monitoring that catches issues before your customers do. We believe in GitOps, Infrastructure as Code, and making your systems self-healing. Every client works directly with our technical team, ensuring fast decisions and real solutions.</p>
+                <div class="values-grid">
+
+                    <div class="value-card">
+                        <div class="value-icon">🚀</div>
+                        <h4>Complete DevOps Setup</h4>
+                        <p>From Git workflows to Kubernetes deployments, we implement the full DevOps lifecycle</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">📊</div>
+                        <h4>Real-Time Monitoring</h4>
+                        <p>Grafana, Prometheus, ELK Stack - know what's happening in your infrastructure 24/7</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">💡</div>
+                        <h4>Startup-Friendly Pricing</h4>
+                        <p>Enterprise-quality DevOps without enterprise prices. Flexible plans for growing teams</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual">
+                <div class="team-illustration" style="background: #f8f9fa; padding: 30px; border-radius: 16px; border: 1px solid #e9ecef;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🛠️</div>
+                        <h3 style="color: var(--heading-dark); margin-bottom: 20px;">Our DevOps Toolkit</h3>
+                        
+                        <div style="display: grid; gap: 12px; text-align: left; font-size: 14px;">
+                            <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e9ecef;">
+                                <strong style="color: #2563eb;">☁️ Cloud Platforms:</strong>
+                                <span style="color: #6b7280;"> AWS, Azure, GCP, DigitalOcean</span>
                             </div>
-                            <div class="demo-message bot">
-                                <div class="demo-bubble">
-                                    Here's our menu for today! 
-                                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" alt="Food Menu" class="demo-image">
-                                    <div class="demo-buttons">
-                                        <button class="demo-button">📅 Reserve Table</button>
-                                        <button class="demo-button">📱 View PDF</button>
-                                    </div>
-                                </div>
+                            
+                            <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e9ecef;">
+                                <strong style="color: #059669;">🔧 Infrastructure as Code:</strong>
+                                <span style="color: #6b7280;"> Terraform, Ansible, CloudFormation</span>
+                            </div>
+                            
+                            <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e9ecef;">
+                                <strong style="color: #7c3aed;">🐳 Containers & Orchestration:</strong>
+                                <span style="color: #6b7280;"> Docker, Kubernetes, Helm</span>
+                            </div>
+                            
+                            <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e9ecef;">
+                                <strong style="color: #dc2626;">🔄 CI/CD:</strong>
+                                <span style="color: #6b7280;"> Jenkins, GitLab CI, GitHub Actions, ArgoCD</span>
+                            </div>
+                            
+                            <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e9ecef;">
+                                <strong style="color: #f59e0b;">📈 Monitoring & Logging:</strong>
+                                <span style="color: #6b7280;"> Prometheus, Grafana, ELK, Datadog</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Services</span>
-                <h2 class="section-title">Enterprise Solutions That Scale</h2>
-                <p class="section-subtitle">From concept to deployment, we deliver end-to-end technology solutions</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">🎨</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>Website Design & Development</h3>
-                        <p>Modern, responsive websites built with React, Next.js, and cutting-edge technologies. Optimized for performance and user experience.</p>
-                        <div class="service-logs">
-                            <div class="log-line log-info">$ npm run build</div>
-                            <div class="log-line log-success">✓ Build optimized (2.4s)</div>
-                            <div class="log-line log-success">✓ SEO score: 100/100</div>
-                            <div class="log-line log-success">✓ Performance: 98/100</div>
-                            <div class="log-line log-info">$ vercel deploy --prod</div>
-                            <div class="log-line log-success">✓ Deployed to production</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">🤖</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>AI Chatbots</h3>
-                        <p>Intelligent conversational AI with NLP, machine learning, and custom training. Integrate with any platform seamlessly.</p>
-                        <div class="service-logs">
-                            <div class="log-line log-info">$ python inference.py</div>
-                            <div class="log-line log-warning">Loading model weights...</div>
-                            <div class="log-line log-success">✓ Model loaded (GPT-4)</div>
-                            <div class="log-line log-success">✓ RAG database connected</div>
-                            <div class="log-line log-info">Response time: 0.2s</div>
-                            <div class="log-line log-success">✓ API endpoint ready</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">☁️</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>Cloud & DevOps Solutions</h3>
-                        <p>AWS, Azure, and DigitalOcean infrastructure design, deployment, and management. Complete CI/CD pipelines.</p>
-                        <div class="service-logs">
-                            <div class="log-line log-info">$ aws ec2 describe-instances</div>
-                            <div class="log-line log-success">✓ 12 instances running</div>
-                            <div class="log-line log-info">$ terraform apply</div>
-                            <div class="log-line log-success">✓ Infrastructure updated</div>
-                            <div class="log-line log-info">$ kubectl get pods</div>
-                            <div class="log-line log-success">✓ All pods healthy</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">⚙️</div>
-                    </div>
-                    <div class="service-content">
-                        <h3>Enterprise DevOps Stack</h3>
-                        <p>Complete DevOps transformation with Jenkins, GitHub Actions, monitoring, and automation tools.</p>
-                        <div class="service-logs">
-                            <div class="log-line log-info">$ docker ps</div>
-                            <div class="log-line log-success">✓ 15 containers running</div>
-                            <div class="log-line log-info">$ jenkins build #427</div>
-                            <div class="log-line log-success">✓ Build successful</div>
-                            <div class="log-line log-info">$ prometheus status</div>
-                            <div class="log-line log-success">✓ Monitoring active</div>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background: #e0f2fe; border-radius: 8px;">
+                            <p style="color: #0369a1; font-size: 14px; margin: 0;">
+                                <strong>Why Choose a Startup?</strong><br>
+                                Direct founder attention • Faster response times • Flexible solutions • Growing with you
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Why ForgeItOps Section -->
-    <section class="why-section" id="why">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label" style="background: linear-gradient(135deg, var(--emerald-green), var(--electric-blue)); color: white;">Why Choose Us</span>
-                <h2 class="section-title" style="color: white;">Trusted to Power Modern Enterprises</h2>
-                <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Real results, proven expertise, and unwavering commitment to excellence</p>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-label">Uptime Guarantee</div>
+        
+        <!-- What We Offer -->
+        <div style="margin-top: 50px; padding: 40px; background: #f8f9fa; border-radius: 16px;">
+            <h3 style="text-align: center; margin-bottom: 30px; color: var(--heading-dark);">What We Bring to Your Team</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">⚡</div>
+                    <h4 style="margin-bottom: 8px;">Quick Implementation</h4>
+                    <p style="color: #6b7280; font-size: 14px;">Get your DevOps pipeline running in days, not months</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Projects Delivered</div>
+                <div style="text-align: center;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">👥</div>
+                    <h4 style="margin-bottom: 8px;">Personal Support</h4>
+                    <p style="color: #6b7280; font-size: 14px;">Work directly with our founders and senior engineers</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Support Available</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Enterprise Clients</div>
-                </div>
-            </div>
-            
-            <div class="dashboard-preview">
-                <div class="dashboard-header">
-                    <div class="dashboard-title">
-                        <span class="status-indicator"></span>
-                        Live Infrastructure Dashboard - Grafana/Prometheus
-                    </div>
-                    <span style="color: rgba(255, 255, 255, 0.6);">Last updated: 2 seconds ago</span>
-                </div>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">99.98%</div>
-                        <div class="metric-label">System Uptime</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">0.23s</div>
-                        <div class="metric-label">Avg Response Time</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">1.2M</div>
-                        <div class="metric-label">Requests/Day</div>
-                    </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">📚</div>
+                    <h4 style="margin-bottom: 8px;">Knowledge Transfer</h4>
+                    <p style="color: #6b7280; font-size: 14px;">We document everything and train your team</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Client Use Cases Section -->
-    <section class="use-cases" id="use-cases">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Use Cases</span>
-                <h2 class="section-title">Solutions for Every Industry</h2>
-                <p class="section-subtitle">See how ForgeItOps transforms businesses across different sectors</p>
+
+
+<!-- Why ForgeItOps Section -->
+<section class="why-section" id="why">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" style="background: linear-gradient(135deg, var(--emerald-green), var(--electric-blue)); color: white;">Why Choose ForgeItOps</span>
+            <h2 class="section-title" style="color: white;">Startup Agility, Enterprise-Grade Results</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">We bring the speed and flexibility of a startup with the technical expertise your business needs</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">< 24h</div>
+                <div class="stat-label">Response Time</div>
             </div>
-            <div class="use-cases-tabs">
-                <button class="tab-btn active" onclick="showUseCase('startups')">Startups</button>
-                <button class="tab-btn" onclick="showUseCase('enterprise')">Enterprises</button>
-                <button class="tab-btn" onclick="showUseCase('restaurants')">Restaurants</button>
-                <button class="tab-btn" onclick="showUseCase('healthcare')">Healthcare</button>
-                <button class="tab-btn" onclick="showUseCase('education')">Education</button>
-                <button class="tab-btn" onclick="showUseCase('worldwide')">Worldwide Business</button>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Active Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years Combined Experience</div>
+            </div>
+        </div>
+        
+        <div class="dashboard-preview">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <span class="status-indicator"></span>
+                    Client Infrastructure Monitoring - Grafana Dashboard
+                </div>
+                <span style="color: rgba(255, 255, 255, 0.6);">Real-time monitoring for our clients</span>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">99.5%</div>
+                    <div class="metric-label">Average Uptime</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0.8s</div>
+                    <div class="metric-label">Response Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">200</div>
+                    <div class="metric-label">Daily Requests</div>
+                </div>
             </div>
             
-            <div class="use-case-content active" id="startups">
-                <div class="use-case-text">
-                    <h3>Scalable Infrastructure for Startups</h3>
-                    <p>Launch fast and scale effortlessly with our cloud-native solutions. We provide the technical foundation that grows with your startup.</p>
-                    <ul class="use-case-list">
-                        <li>✅ Rapid MVP development and deployment</li>
-                        <li>✅ Cost-optimized cloud infrastructure</li>
-                        <li>✅ Automated CI/CD pipelines</li>
-                        <li>✅ 24/7 monitoring and support</li>
-                    </ul>
-                </div>
-                <div class="use-case-visual">
-                    <div class="infra-diagram">
-                        <div style="text-align: center;">
-                            <div style="font-size: 60px; margin-bottom: 20px;">🚀</div>
-                            <h4 style="color: var(--heading-dark);">Startup Infrastructure</h4>
-                            <p style="color: var(--body-text); margin: 20px 0;">Auto-scaling • Load Balancing • CDN • Monitoring</p>
-                        </div>
+            <!-- What Makes Us Different -->
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px;">
+                <h4 style="color: white; margin-bottom: 20px; text-align: center;">Why Startups & SMBs Choose Us</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 30px; margin-bottom: 8px;">⚡</div>
+                        <div style="color: white; font-weight: 600; margin-bottom: 5px;">Fast Setup</div>
+                        <div style="color: rgba(255, 255, 255, 0.7); font-size: 13px;">Get your DevOps pipeline running in days, not months</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 30px; margin-bottom: 8px;">💰</div>
+                        <div style="color: white; font-weight: 600; margin-bottom: 5px;">Startup Pricing</div>
+                        <div style="color: rgba(255, 255, 255, 0.7); font-size: 13px;">Enterprise tools without enterprise costs</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 30px; margin-bottom: 8px;">👥</div>
+                        <div style="color: white; font-weight: 600; margin-bottom: 5px;">Direct Access</div>
+                        <div style="color: rgba(255, 255, 255, 0.7); font-size: 13px;">Work directly with our technical founders</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px;">
+                        <div style="font-size: 30px; margin-bottom: 8px;">🎯</div>
+                        <div style="color: white; font-weight: 600; margin-bottom: 5px;">Focused Expertise</div>
+                        <div style="color: rgba(255, 255, 255, 0.7); font-size: 13px;">We do DevOps, and we do it really well</div>
                     </div>
                 </div>
             </div>
             
-            <div class="use-case-content" id="enterprise">
-                <div class="use-case-text">
-                    <h3>Enterprise-Grade DevOps & Monitoring</h3>
-                    <p>Transform your enterprise with robust DevOps practices, global infrastructure, and comprehensive monitoring solutions.</p>
-                    <ul class="use-case-list">
-                        <li>✅ Global multi-region deployment</li>
-                        <li>✅ Advanced monitoring with Grafana/Prometheus</li>
-                        <li>✅ Zero-downtime deployments</li>
-                        <li>✅ Enterprise security compliance</li>
-                    </ul>
+            <!-- Technologies We Use -->
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.03); border-radius: 8px;">
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 14px;">Powered by industry-standard tools:</span>
                 </div>
-                <div class="use-case-visual">
-                    <div class="infra-diagram">
-                        <div style="text-align: center;">
-                            <div style="font-size: 60px; margin-bottom: 20px;">🏢</div>
-                            <h4 style="color: var(--heading-dark);">Enterprise DevOps</h4>
-                            <p style="color: var(--body-text); margin: 20px 0;">Jenkins • Kubernetes • Docker • Terraform</p>
-                        </div>
-                    </div>
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; align-items: center;">
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">Docker</span>
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">Kubernetes</span>
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">Terraform</span>
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">Jenkins</span>
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">Prometheus</span>
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">Grafana</span>
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">AWS</span>
+                    <span style="color: rgba(255, 255, 255, 0.6); font-size: 13px;">Azure</span>
                 </div>
             </div>
-            
-            <div class="use-case-content" id="restaurants">
-                <div class="use-case-text">
-                    <h3>Smart Restaurant Solutions</h3>
-                    <p>Enhance customer experience with AI chatbots that handle reservations, send menus, and manage orders seamlessly.</p>
-                    <ul class="use-case-list">
-                        <li>✅ Automated table reservations</li>
-                        <li>✅ Digital menu sharing</li>
-                        <li>✅ Order management system</li>
-                        <li>✅ Customer feedback collection</li>
-                    </ul>
-                </div>
-                <div class="use-case-visual">
-                    <div class="infra-diagram">
-                        <div style="text-align: center;">
-                            <div style="font-size: 60px; margin-bottom: 20px;">🍽️</div>
-                            <h4 style="color: var(--heading-dark);">Restaurant Chatbot</h4>
-                            <p style="color: var(--body-text); margin: 20px 0;">Menu Sharing • Bookings • Orders • Reviews</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="use-case-content" id="healthcare">
-                <div class="use-case-text">
-                    <h3>Healthcare Automation</h3>
-                    <p>Streamline patient scheduling, automate appointment reminders, and provide 24/7 patient support.</p>
-                    <ul class="use-case-list">
-                        <li>✅ Automated patient scheduling</li>
-                        <li>✅ Appointment reminders</li>
-                        <li>✅ Medical FAQ chatbot</li>
-                        <li>✅ HIPAA compliant infrastructure</li>
-                    </ul>
-                </div>
-                <div class="use-case-visual">
-                    <div class="infra-diagram">
-                        <div style="text-align: center;">
-                            <div style="font-size: 60px; margin-bottom: 20px;">🏥</div>
-                            <h4 style="color: var(--heading-dark);">Healthcare AI</h4>
-                            <p style="color: var(--body-text); margin: 20px 0;">Scheduling • Reminders • Support • Compliance</p>
-                        </div>
-                    </div>
+        </div>
+    </div>
+</section>
+
+<!-- Industries Section -->
+<section class="use-cases" id="industries">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Industries We Serve</span>
+            <h2 class="section-title">Transforming Businesses Across Key Sectors</h2>
+            <p class="section-subtitle">From modern web applications to AI-powered solutions and robust cloud infrastructure</p>
+        </div>
+        <div class="use-cases-tabs">
+            <button class="tab-btn active" onclick="showUseCase('education')">Education</button>
+            <button class="tab-btn" onclick="showUseCase('healthcare')">Healthcare</button>
+            <button class="tab-btn" onclick="showUseCase('business')">Growing Business</button>
+            <button class="tab-btn" onclick="showUseCase('startups')">Tech Startups</button>
+            <button class="tab-btn" onclick="showUseCase('web-solutions')">Web Solutions</button>
+            <button class="tab-btn" onclick="showUseCase('ai-automation')">AI & Automation</button>
+        </div>
+        
+        <div class="use-case-content active" id="education">
+            <div class="use-case-text">
+                <h3>Modern Education Technology</h3>
+                <p>Modernizing educational institutions with scalable web platforms, student management systems, and AI-powered learning tools.</p>
+                <ul class="use-case-list">
+                    <li>✅ Learning Management Systems (LMS)</li>
+                    <li>✅ Student portals and dashboards</li>
+                    <li>✅ AI tutoring chatbots</li>
+                    <li>✅ Secure cloud infrastructure</li>
+                    <li>✅ Automated grading systems</li>
+                </ul>
+                <div class="case-study-highlight">
+                    <strong>Recent Success:</strong> Deployed automated grading system with 99.9% uptime for local academy
                 </div>
             </div>
-            
-            <div class="use-case-content" id="education">
-                <div class="use-case-text">
-                    <h3>Education Technology</h3>
-                    <p>Deploy AI tutors, FAQ bots, and learning management systems that enhance educational experiences.</p>
-                    <ul class="use-case-list">
-                        <li>✅ AI-powered tutoring</li>
-                        <li>✅ Student FAQ bots</li>
-                        <li>✅ Course management systems</li>
-                        <li>✅ Interactive learning platforms</li>
-                    </ul>
-                </div>
-                <div class="use-case-visual">
-                    <div class="infra-diagram">
-                        <div style="text-align: center;">
-                            <div style="font-size: 60px; margin-bottom: 20px;">🎓</div>
-                            <h4 style="color: var(--heading-dark);">Education Platform</h4>
-                            <p style="color: var(--body-text); margin: 20px 0;">AI Tutors • FAQ Bots • LMS • Analytics</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="use-case-content" id="worldwide">
-                <div class="use-case-text">
-                    <h3>Worldwide Business Solutions</h3>
-                    <p>Global website design and chatbot solutions for businesses operating across multiple regions and languages.</p>
-                    <ul class="use-case-list">
-                        <li>✅ Multi-language support</li>
-                        <li>✅ Global CDN deployment</li>
-                        <li>✅ Localized chatbot responses</li>
-                        <li>✅ International payment integration</li>
-                    </ul>
-                </div>
-                <div class="use-case-visual">
-                    <div class="infra-diagram">
-                        <div style="text-align: center;">
-                            <div style="font-size: 60px; margin-bottom: 20px;">🌍</div>
-                            <h4 style="color: var(--heading-dark);">Global Solutions</h4>
-                            <p style="color: var(--body-text); margin: 20px 0;">Multi-region • Multi-language • 24/7 Support</p>
+            <div class="use-case-visual">
+                <div class="infra-diagram">
+                    <div style="text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🎓</div>
+                        <h4 style="color: var(--heading-dark);">Education Platform</h4>
+                        <p style="color: var(--body-text); margin: 20px 0;">LMS • Student Portals • AI Tutors • Cloud Security</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                            <span style="background: #e0f2fe; color: #0369a1; padding: 5px 10px; border-radius: 15px; font-size: 12px;">React</span>
+                            <span style="background: #f0f9ff; color: #1e40af; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Node.js</span>
+                            <span style="background: #ecfdf5; color: #059669; padding: 5px 10px; border-radius: 15px; font-size: 12px;">AWS</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label" style="background: linear-gradient(135deg, var(--soft-gold), var(--primary-gradient-end)); color: white;">Testimonials</span>
-                <h2 class="section-title" style="color: white;">What Our Clients Say</h2>
-                <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Real feedback from businesses we've helped transform</p>
+        
+        <div class="use-case-content" id="healthcare">
+            <div class="use-case-text">
+                <h3>Healthcare Digital Solutions</h3>
+                <p>HIPAA-compliant solutions including patient portals, appointment systems, and AI-powered chatbots for medical consultations.</p>
+                <ul class="use-case-list">
+                    <li>✅ Patient management systems</li>
+                    <li>✅ Online appointment booking</li>
+                    <li>✅ Medical AI assistants</li>
+                    <li>✅ HIPAA compliant infrastructure</li>
+                    <li>✅ Secure patient data handling</li>
+                </ul>
+                <div class="case-study-highlight">
+                    <strong>Recent Success:</strong> Built secure patient portal reducing admin workload by 40%
+                </div>
             </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"ForgeItOps transformed our infrastructure — from chaos to seamless automation. Their DevOps expertise saved us countless hours and significantly reduced our operational costs."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JD</div>
-                        <div class="author-info">
-                            <h4>John Davidson</h4>
-                            <p>CTO, TechStart Inc.</p>
+            <div class="use-case-visual">
+                <div class="infra-diagram">
+                    <div style="text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🏥</div>
+                        <h4 style="color: var(--heading-dark);">Healthcare Platform</h4>
+                        <p style="color: var(--body-text); margin: 20px 0;">Patient Portals • Appointments • AI Support • Compliance</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                            <span style="background: #fef3c7; color: #d97706; padding: 5px 10px; border-radius: 15px; font-size: 12px;">HIPAA</span>
+                            <span style="background: #fee2e2; color: #dc2626; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Security</span>
+                            <span style="background: #e0f2fe; color: #0369a1; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Azure</span>
                         </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"Their AI chatbot boosted our customer engagement by 200%. The intelligent responses and seamless integration exceeded our expectations."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div class="author-info">
-                            <h4>Sarah Mitchell</h4>
-                            <p>Marketing Director, E-Shop Global</p>
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"We trust ForgeItOps for enterprise-grade cloud and DevOps expertise. They delivered a robust, scalable solution that handles millions of requests daily."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RC</div>
-                        <div class="author-info">
-                            <h4>Robert Chen</h4>
-                            <p>VP Engineering, FinTech Solutions</p>
-                        </div>
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
+        
+        <div class="use-case-content" id="business">
+            <div class="use-case-text">
+                <h3>Growing Business Solutions</h3>
+                <p>Complete digital transformation for SMBs - from professional websites to automated workflows and intelligent customer support.</p>
+                <ul class="use-case-list">
+                    <li>✅ Professional business websites</li>
+                    <li>✅ E-commerce platforms</li>
+                    <li>✅ Customer support chatbots</li>
+                    <li>✅ Scalable cloud infrastructure</li>
+                    <li>✅ Payment system integration</li>
+                </ul>
+                <div class="case-study-highlight">
+                    <strong>Recent Success:</strong> Automated deployment pipeline reducing release time from days to hours
+                </div>
+            </div>
+            <div class="use-case-visual">
+                <div class="infra-diagram">
+                    <div style="text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🏢</div>
+                        <h4 style="color: var(--heading-dark);">Business Platform</h4>
+                        <p style="color: var(--body-text); margin: 20px 0;">Websites • E-commerce • Support Bots • Automation</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                            <span style="background: #ecfdf5; color: #059669; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Shopify</span>
+                            <span style="background: #f3e8ff; color: #7c3aed; padding: 5px 10px; border-radius: 15px; font-size: 12px;">WordPress</span>
+                            <span style="background: #fef3c7; color: #d97706; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Stripe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="use-case-content" id="startups">
+            <div class="use-case-text">
+                <h3>Tech Startup Infrastructure</h3>
+                <p>MVP development, DevOps setup, and AI integration to help startups launch faster and scale efficiently from day one.</p>
+                <ul class="use-case-list">
+                    <li>✅ Rapid MVP development</li>
+                    <li>✅ CI/CD pipeline setup</li>
+                    <li>✅ Kubernetes orchestration</li>
+                    <li>✅ Auto-scaling infrastructure</li>
+                    <li>✅ Cost optimization strategies</li>
+                </ul>
+                <div class="case-study-highlight">
+                    <strong>Recent Success:</strong> Kubernetes setup handling 10x traffic growth without downtime
+                </div>
+            </div>
+            <div class="use-case-visual">
+                <div class="infra-diagram">
+                    <div style="text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🚀</div>
+                        <h4 style="color: var(--heading-dark);">Startup Infrastructure</h4>
+                        <p style="color: var(--body-text); margin: 20px 0;">MVP • CI/CD • Kubernetes • Auto-scaling</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                            <span style="background: #e0f2fe; color: #0369a1; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Docker</span>
+                            <span style="background: #f0f9ff; color: #1e40af; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Jenkins</span>
+                            <span style="background: #ecfdf5; color: #059669; padding: 5px 10px; border-radius: 15px; font-size: 12px;">AWS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="use-case-content" id="web-solutions">
+            <div class="use-case-text">
+                <h3>Modern Web Applications</h3>
+                <p>Responsive, fast-loading websites and web apps built with the latest technologies. From simple business sites to complex applications.</p>
+                <ul class="use-case-list">
+                    <li>✅ React, Vue.js, Next.js development</li>
+                    <li>✅ Progressive Web Apps (PWAs)</li>
+                    <li>✅ E-commerce platforms</li>
+                    <li>✅ Content management systems</li>
+                    <li>✅ Mobile-responsive design</li>
+                </ul>
+                <div class="case-study-highlight">
+                    <strong>Recent Success:</strong> Built high-performance e-commerce site with 2s load time
+                </div>
+            </div>
+            <div class="use-case-visual">
+                <div class="infra-diagram">
+                    <div style="text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🌐</div>
+                        <h4 style="color: var(--heading-dark);">Web Development</h4>
+                        <p style="color: var(--body-text); margin: 20px 0;">React • Vue.js • PWAs • E-commerce</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                            <span style="background: #e0f2fe; color: #0369a1; padding: 5px 10px; border-radius: 15px; font-size: 12px;">React</span>
+                            <span style="background: #ecfdf5; color: #059669; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Vue.js</span>
+                            <span style="background: #f3e8ff; color: #7c3aed; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Next.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="use-case-content" id="ai-automation">
+            <div class="use-case-text">
+                <h3>AI Chatbots & Automation</h3>
+                <p>Intelligent chatbots that handle customer inquiries, automate workflows, and provide 24/7 support for your business.</p>
+                <ul class="use-case-list">
+                    <li>✅ Customer support automation</li>
+                    <li>✅ Lead qualification bots</li>
+                    <li>✅ Internal workflow automation</li>
+                    <li>✅ Multi-language support</li>
+                    <li>✅ Integration with existing systems</li>
+                </ul>
+                <div class="case-study-highlight">
+                    <strong>Recent Success:</strong> AI chatbot reduced customer response time by 80%
+                </div>
+            </div>
+            <div class="use-case-visual">
+                <div class="infra-diagram">
+                    <div style="text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🤖</div>
+                        <h4 style="color: var(--heading-dark);">AI & Automation</h4>
+                        <p style="color: var(--body-text); margin: 20px 0;">Chatbots • Automation • AI Support • Integration</p>
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                            <span style="background: #fef3c7; color: #d97706; padding: 5px 10px; border-radius: 15px; font-size: 12px;">OpenAI</span>
+                            <span style="background: #e0f2fe; color: #0369a1; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Dialogflow</span>
+                            <span style="background: #f3e8ff; color: #7c3aed; padding: 5px 10px; border-radius: 15px; font-size: 12px;">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -3415,6 +4315,8 @@ window.addEventListener('load', () => {
         }
         createParticles();
 
+
+        
         // Tab switching for use cases
         function showUseCase(caseId) {
             const tabs = document.querySelectorAll('.tab-btn');
@@ -3810,6 +4712,8 @@ function addWelcomeMessages() {
 // Initialize messageCount if not already defined
 window.messageCount = window.messageCount || 0;
 
+
+
 function addMessage(text, sender) {
     const messagesContainer = document.getElementById('chatMessages');
     if (!messagesContainer) return;
@@ -3827,6 +4731,13 @@ function addMessage(text, sender) {
             <div class="bot-avatar-mini">🤖</div>
             <div class="message-wrapper">
                 <div class="message-content">
+                    <div class="message-header">
+                        <div class="audio-icon" onclick="textToSpeech(this.parentNode.parentNode)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </div>
+                    </div>
                     ${text}
                 </div>
                 <div class="message-time">
@@ -3838,6 +4749,13 @@ function addMessage(text, sender) {
         messageDiv.innerHTML = `
             <div class="message-wrapper">
                 <div class="message-content">
+                    <div class="message-header">
+                        <div class="audio-icon" onclick="textToSpeech(this.parentNode.parentNode)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </div>
+                    </div>
                     ${text}
                 </div>
                 <div class="message-time">
@@ -3860,7 +4778,17 @@ function addMessage(text, sender) {
     window.messageCount++;
 }
 
+
+
+
+
+
+
 // Add fallback response function if missing
+
+
+
+
 function getSmartResponse(message) {
     const lowerMessage = message.toLowerCase();
     
@@ -3885,6 +4813,195 @@ function updateSuggestions(message) {
     console.log("Updating suggestions based on:", message);
 }
 
+
+// Add these variables at the beginning of your script section
+let chatId = null;
+let isInitialized = false;
+
+// Add this initialization function that calls the API to get a chat ID
+async function initializeChatbot() {
+    if (isInitialized) return;
+    
+    try {
+        const response = await fetch('https://n8n.forgeitops.solutions/webhook/ForgeItOpsgetID', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                source: 'widget'
+            })
+        });
+
+        const data = await response.json();
+        chatId = data.chatId;
+        console.log('Chat initialized with ID:', chatId);
+        
+        // Show initial message once we have the ID
+        showTypingIndicator();
+        setTimeout(() => {
+            removeTypingIndicator();
+            addMessage("👋 Welcome to ForgeItOps! I'm your AI assistant. How can I help you today?", 'bot');
+        }, 1500);
+        
+        isInitialized = true;
+    } catch (error) {
+        console.error('Failed to initialize chat:', error);
+        // Don't set a fallback ID, wait until API is available
+        
+        // Still show welcome message
+        showTypingIndicator();
+        setTimeout(() => {
+            removeTypingIndicator();
+            addMessage("👋 Welcome to ForgeItOps! I'm your AI assistant. Something went wrong with initialization. Please try again later.", 'bot');
+        }, 1500);
+    }
+}
+
+// Modify your toggleChatbot function to initialize the chat when opened
+function toggleChatbot() {
+    clearAttentionGrabbers();
+    const chatWindow = document.getElementById('chatbotWindow');
+    chatbotOpen = !chatbotOpen;
+    
+    if (chatbotOpen) {
+        chatWindow.classList.add('active');
+        
+        const notificationBadge = document.querySelector('.notification-badge');
+        if (notificationBadge) notificationBadge.style.display = 'none';
+        
+        setTimeout(() => {
+            document.getElementById('chatInput').focus();
+        }, 300);
+        
+        // Initialize the chat if it's the first time opening
+        if (!isInitialized) {
+            initializeChatbot();
+        }
+    } else {
+        chatWindow.classList.remove('active');
+    }
+}
+
+
+
+
+async function textToSpeech(iconElement, text) {
+    // Get the message content container and determine if it's a user or bot message
+    const messageWrapper = iconElement.closest('.message-wrapper');
+    const messageContent = iconElement.closest('.message-content');
+    const isUserMessage = messageContent.closest('.user') !== null;
+    
+    console.log("Processing", isUserMessage ? "user message" : "bot message");
+    
+    // Check if there's already an audio player, remove it
+    const existingPlayer = messageContent.querySelector('.audio-player-container');
+    if (existingPlayer) {
+        existingPlayer.remove();
+        return; // Toggle off if clicking again
+    }
+    
+    // Extract text based on message type
+    if (!text) {
+        try {
+            if (isUserMessage) {
+                // For user messages, get text directly without HTML elements
+                text = messageContent.textContent || messageContent.innerText || '';
+                // Remove the header icon text if present
+                const header = messageContent.querySelector('.message-header');
+                if (header) {
+                    const headerText = header.textContent || header.innerText || '';
+                    text = text.replace(headerText, '').trim();
+                }
+            } else {
+                // For bot messages, clone and remove header
+                const tempClone = messageContent.cloneNode(true);
+                const iconToRemove = tempClone.querySelector('.message-header');
+                if (iconToRemove) iconToRemove.remove();
+                text = tempClone.textContent || tempClone.innerText || '';
+            }
+            
+            // Remove timestamps and status indicators
+            text = text.replace(/\d{1,2}:\d{2}\s*(?:AM|PM)?/g, '').trim();
+            console.log("Extracted text:", text);
+        } catch (e) {
+            console.error("Error extracting text:", e);
+        }
+    }
+    
+    if (!text || text.trim() === '') {
+        console.error("No text found to convert to speech");
+        return;
+    }
+    
+    const cleanText = text.replace(/\s+/g, ' ').trim();
+    
+    // Create player container with loading state
+    const playerContainer = document.createElement('div');
+    playerContainer.className = 'audio-player-container';
+    playerContainer.style.width = '100%';
+    playerContainer.style.marginTop = '10px';
+    playerContainer.style.padding = '10px';
+    playerContainer.style.borderRadius = '10px';
+    playerContainer.style.background = isUserMessage ? 
+        'rgba(255, 255, 255, 0.15)' : 'rgba(124, 77, 255, 0.1)';
+    playerContainer.style.textAlign = 'center';
+    playerContainer.innerHTML = '<div style="color: #ffffff; font-size: 14px;">Generating audio...</div>';
+    messageContent.appendChild(playerContainer);
+    
+    try {
+        console.log("Sending POST request with text:", cleanText);
+        
+        // Use XMLHttpRequest for better binary data handling
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://n8n.forgeitops.solutions/webhook/ForgeItOpsgeAudio', true);
+        xhr.responseType = 'blob'; // Important: handle as binary data
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        
+        xhr.onload = function() {
+            if (this.status === 200) {
+                const blob = new Blob([this.response], {type: 'audio/mpeg'});
+                const url = URL.createObjectURL(blob);
+                
+                // Update player with actual audio
+                playerContainer.innerHTML = '';
+                const audio = document.createElement('audio');
+                audio.controls = true;
+                audio.src = url;
+                audio.style.width = '100%';
+                audio.style.height = '36px';
+                playerContainer.appendChild(audio);
+                
+                // Try to play (may be blocked by browser)
+                audio.play().catch(e => console.log("Autoplay prevented, user must click play"));
+            } else {
+                throw new Error(`Server returned status ${this.status}`);
+            }
+        };
+        
+        xhr.onerror = function() {
+            throw new Error("Network error occurred");
+        };
+        
+        // Send the request
+        xhr.send(JSON.stringify({
+            text: cleanText,
+            voice: "voice-107",
+            pitch: 0,
+            rate: 0
+        }));
+        
+    } catch (error) {
+        console.error("TTS error:", error);
+        playerContainer.innerHTML = `<div style="color: #ff4d4d;">Error: ${error.message}</div>`;
+    }
+}
+
+
+
+
+
+
 async function sendMessage() {
     const input = document.getElementById('chatInput');
     if (!input) return;
@@ -3892,6 +5009,12 @@ async function sendMessage() {
     const message = input.value.trim();
     
     if (!message) return;
+    
+    // Check if we have a chat ID first
+    if (!chatId) {
+        addMessage("Chat initialization is still in progress. Please try again in a moment.", 'bot');
+        return;
+    }
     
     // Add user message
     addMessage(message, 'user');
@@ -3904,8 +5027,8 @@ async function sendMessage() {
     showTypingIndicator();
     
     try {
-        // Send to API
-        const response = await fetch('https://pet-ideally-rabbit.ngrok-free.app/webhook/troisecole', {
+        // Send to API with the chatId from the API
+        const response = await fetch('https://n8n.forgeitops.solutions/webhook/ForgeItOpschat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -3913,56 +5036,99 @@ async function sendMessage() {
             },
             body: JSON.stringify({
                 message: message,
-                user_id: 'web_' + Date.now(),
-                timestamp: new Date().toISOString()
+                chatid: chatId,
+                user_id: chatId,
+                timestamp: new Date().toISOString(),
+                source: 'website'
             })
         });
         
-        const data = await response.json();
+        // Get the raw response text
+        const rawResponse = await response.text();
+        console.log("Raw API response:", rawResponse);
+        
+        // Fix duplicated JSON issue
+        let responseText = rawResponse;
+        if (rawResponse.includes('} {')) {
+            responseText = rawResponse.split('} {')[0] + '}';
+        }
+        
+        // Extract only the content field
+        let finalContent = "";
+        try {
+            // Parse the outer JSON first
+            const parsedData = JSON.parse(responseText);
+            console.log("Parsed data:", parsedData);
+            
+            // Check if response is a string containing JSON (nested response)
+            if (parsedData.response && typeof parsedData.response === 'string') {
+                try {
+                    // Try to parse the nested JSON in the response field
+                    const nestedData = JSON.parse(parsedData.response);
+                    console.log("Nested data:", nestedData);
+                    
+                    if (nestedData.type === 'image') {
+                        // Updated image display with description above the image
+                        finalContent = `
+                            <div style="width: 100%; display: flex; flex-direction: column; gap: 12px;">
+                                ${nestedData.text ? `<div style="font-size: 14px; line-height: 1.5; color: #ffffff; margin-bottom: 8px;">${nestedData.text}</div>` : ''}
+                                <img src="${nestedData.image_url}" alt="ForgeItOps Image" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                            </div>
+                        `;
+                    } else if (nestedData.type === 'text') {
+                        finalContent = nestedData.content;
+                    } else {
+                        finalContent = nestedData.content || nestedData.message || "I'm here to help with ForgeItOps solutions.";
+                    }
+                } catch (e) {
+                    console.error("Failed to parse nested response:", e);
+                    // If nested parsing fails, use the response as is
+                    finalContent = parsedData.response;
+                }
+            }
+            // Direct response (not nested)
+            else if (parsedData.type === 'text' && parsedData.content) {
+                finalContent = parsedData.content;
+            } else if (parsedData.type === 'image') {
+                // Updated image display with description above the image
+                finalContent = `
+                    <div style="width: 100%; display: flex; flex-direction: column; gap: 12px;">
+                        ${parsedData.text ? `<div style="font-size: 14px; line-height: 1.5; color: #ffffff; margin-bottom: 8px;">${parsedData.text}</div>` : ''}
+                        <img src="${parsedData.image_url}" alt="ForgeItOps Image" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    </div>
+                `;
+            } else {
+                // Fallback options
+                finalContent = parsedData.message || parsedData.content || getSmartResponse(message);
+            }
+        } catch (error) {
+            console.error("Failed to parse response:", error);
+            finalContent = "I apologize for the technical issue. Please try again.";
+        }
         
         // Remove typing indicator
         removeTypingIndicator();
         
-        // Add bot response with formatting
-        let responseContent = data.response || data.message || getSmartResponse(message);
-        
-        // Add rich content if applicable
-        if (message.toLowerCase().includes('menu') || message.toLowerCase().includes('services')) {
-            responseContent += `
-                <div style="margin-top: 12px;">
-                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop" 
-                         alt="Services" 
-                         style="width: 100%; border-radius: 12px; margin-bottom: 8px;">
-                    <div style="display: flex; gap: 8px; margin-top: 8px;">
-                        <button onclick="sendSuggestion('Tell me more about DevOps')" 
-                                style="padding: 6px 12px; background: linear-gradient(135deg, #7C4DFF, #9575CD); 
-                                       border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 12px;">
-                            Learn More
-                        </button>
-                        <button onclick="sendSuggestion('Schedule a consultation')" 
-                                style="padding: 6px 12px; background: linear-gradient(135deg, #2EE6D6, #2196F3); 
-                                       border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 12px;">
-                            Book Now
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-        
-        addMessage(responseContent, 'bot');
+        // Add only the content to the chat
+        console.log("Final content to display:", finalContent);
+        addMessage(finalContent, 'bot');
         
     } catch (error) {
-        console.error('Error:', error);
+        console.error("Error in sendMessage:", error);
         removeTypingIndicator();
         
         // Provide smart fallback response
         const fallbackResponse = getSmartResponse(message);
         addMessage(fallbackResponse, 'bot');
     }
+}
 
-        }
 
-        function getSmartResponse(message) {
+
+
+
+
+function getSmartResponse(message) {
             const msg = message.toLowerCase();
             
             if (msg.includes('price') || msg.includes('cost')) {
@@ -4183,5 +5349,83 @@ async function sendMessage() {
             }
         });
     </script>
+
+
+<script>
+    // Mobile Menu Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create mobile menu button if it doesn't exist
+        const navContainer = document.querySelector('.nav-container');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (!document.querySelector('.mobile-menu-toggle')) {
+            const toggleBtn = document.createElement('button');
+            toggleBtn.className = 'mobile-menu-toggle';
+            toggleBtn.innerHTML = '☰';
+            toggleBtn.setAttribute('aria-label', 'Toggle mobile menu');
+            
+            navContainer.appendChild(toggleBtn);
+            
+            toggleBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+        }
+        
+        // Close mobile menu when clicking on a link
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                if (toggle) toggle.innerHTML = '☰';
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navLinks.contains(e.target) && !e.target.classList.contains('mobile-menu-toggle')) {
+                navLinks.classList.remove('active');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                if (toggle) toggle.innerHTML = '☰';
+            }
+        });
+    });
+
+
+    // Add this to your existing JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Intersection Observer for terminal animations
+    const terminals = document.querySelectorAll('.animated-terminal');
+    
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const terminalObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                // Restart animations
+                const lines = entry.target.querySelectorAll('.terminal-line');
+                lines.forEach((line, index) => {
+                    line.style.animation = 'none';
+                    line.offsetHeight; // Trigger reflow
+                    line.style.animation = null;
+                });
+            }
+        });
+    }, observerOptions);
+    
+    terminals.forEach(terminal => {
+        terminalObserver.observe(terminal);
+    });
+});
+
+
+    </script>
+
+    
 </body>
 </html>
