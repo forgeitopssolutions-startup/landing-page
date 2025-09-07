@@ -5397,9 +5397,15 @@ function downloadChat() {
 
 
 
+
+
+
+
 // Voice Recording Core Variables
 let isRecording = false;
 let recognition = null;
+let recordingTimer = null;
+let recordingStartTime = null;
 let currentLanguage = 'en-US';
 
 // Language Support
@@ -5442,124 +5448,47 @@ const voiceInterfaceText = {
     }
 };
 
-
-
-// Enhanced Voice Recording Variables
-let recordingTimer = null;
-let recordingStartTime = null;
-
+// FIXED: Toggle Voice Function
 function toggleVoice() {
-    const voiceRecording = document.getElementById('voiceRecording');
-    const inputContainer = document.getElementById('inputContainer');
-    const micButton = document.querySelector('.input-action-btn[onclick="toggleVoice()"]');
-    
-    // Initialize SpeechRecognition
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    
-    if (!SpeechRecognition) {
-        showRecordingError("Speech recognition not supported in this browser. Please use Chrome or Edge.");
-        return;
-    }
-    
-    // Toggle recording state
-    window.isRecording = window.isRecording || false;
-    window.isRecording = !window.isRecording;
-    
-    if (window.isRecording) {
-        // Show ultra-pro recording UI
-        if (voiceRecording) {
-            voiceRecording.style.display = 'flex';
-            voiceRecording.classList.add('voice-recording-ultra');
-        }
-        if (inputContainer) inputContainer.style.display = 'none';
-        if (micButton) {
-            micButton.style.background = 'rgba(124, 77, 255, 0.3)';
-            micButton.style.transform = 'scale(1.1)';
-        }
-        
     if (isRecording) {
         stopVoiceRecording();
     } else {
-        startVoiceRecording();
+        // FIXED: Request microphone permission first
+        requestMicrophonePermission();
     }
+}
 
-        // Start timer
-        startRecordingTimer();
+// FIXED: Request microphone permission before starting speech recognition
+async function requestMicrophonePermission() {
+    try {
+        console.log("Requesting microphone permission...");
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         
-        // Start speech recognition
-        const recognition = new SpeechRecognition();
-        recognition.lang = 'en-US';
-        recognition.continuous = false;
-        recognition.interimResults = false;
+        // Stop the stream immediately - we just needed the permission
+        stream.getTracks().forEach(track => track.stop());
         
-        recognition.onstart = function() {
-            console.log('Ultra-pro voice recording started');
-            // Add microphone access indicator
-            updateRecordingStatus('Listening...', true);
-        };
+        console.log("Microphone permission granted, starting voice recording");
+        // Now that we have permission, start the recording
+        startVoiceRecording();
         
-        recognition.onresult = function(event) {
-            const transcript = event.results[0][0].transcript;
-            console.log('Transcript:', transcript);
-            
-            // Show success animation
-            showRecordingSuccess();
-            
-            // Fill the input with the transcript
-            const inputElement = document.getElementById('chatInput');
-            if (inputElement) {
-                inputElement.value = transcript;
-            }
-            
-            // Stop recording
-            setTimeout(() => {
-                toggleVoice();
-                if (inputElement) {
-                    inputElement.focus();
-                }
-                showTranscriptSuccess(transcript);
-            }, 1000);
-        };
+    } catch (err) {
+        console.error("Microphone permission error:", err);
         
-        recognition.onerror = function(event) {
-            console.error('Speech recognition error:', event.error);
-            showRecordingError('Recording error: ' + event.error);
-            toggleVoice();
-        };
-        
-        recognition.onend = function() {
-            if (window.isRecording) {
-                updateRecordingStatus('Processing...', false);
-            }
-        };
-        
-        // Start recognition
-        recognition.start();
-        window.currentRecognition = recognition;
-        
-    } else {
-        // Hide recording UI
-        if (voiceRecording) voiceRecording.style.display = 'none';
-        if (inputContainer) inputContainer.style.display = 'flex';
-        if (micButton) {
-            micButton.style.background = '';
-            micButton.style.transform = '';
-        }
-        
-        // Stop timer
-        stopRecordingTimer();
-        
-        // Stop recognition if active
-        if (window.currentRecognition) {
-            window.currentRecognition.stop();
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+            showRecordingError("Microphone access denied. Please allow microphone access in your browser settings.");
+        } else if (err.name === 'NotFoundError') {
+            showRecordingError("No microphone found. Please connect a microphone and try again.");
+        } else {
+            showRecordingError("Error accessing microphone: " + err.message);
         }
     }
 }
 
-
-
-
+// FIXED: Start Voice Recording function
 function startVoiceRecording() {
+    console.log("Starting voice recording...");
+    
+    // FIXED: Get SpeechRecognition object
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     
     if (!SpeechRecognition) {
@@ -5569,114 +5498,149 @@ function startVoiceRecording() {
 
     const texts = voiceInterfaceText[currentLanguage] || voiceInterfaceText['en-US'];
     
-    // Show recording UI
-    const voiceRecording = document.getElementById('voiceRecording');
-    if (voiceRecording) {
-        voiceRecording.style.display = 'flex';
-    }
-    document.getElementById('inputContainer').style.display = 'none';
-    
-    // Update status
-    const statusText = document.querySelector('.status-text');
-    if (statusText) statusText.textContent = texts.recording;
-    
-    // Initialize recording
-    isRecording = true;
-    recordingStartTime = Date.now();
-    recordingTimer = setInterval(updateRecordingTimer, 100);
-    
-    // Setup speech recognition with REFERENCE LOGIC
-    recognition = new SpeechRecognition();
-    recognition.lang = currentLanguage;
-    recognition.continuous = true;  // KEY: Don't stop on silence
-    recognition.interimResults = true;  // KEY: Show partial results
-    recognition.maxAlternatives = 1;
-
-    // Initialize tracking (CRITICAL FROM REFERENCE)
-    window.finalVoiceResult = '';
-    window.lastProcessedResultIndex = 0;
-
-    recognition.onstart = () => {
-        const statusText = document.querySelector('.status-text');
-        if (statusText) statusText.textContent = texts.listening;
-    };
-
-    // REFERENCE LOGIC: Proper result handling
-    recognition.onresult = (event) => {
-        let finalTranscript = '';
-        let interimTranscript = '';
-        
-        // Only process NEW results
-        for (let i = window.lastProcessedResultIndex; i < event.results.length; i++) {
-            const transcript = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-                finalTranscript += transcript + ' ';
-                window.lastProcessedResultIndex = i + 1;
-            } else {
-                interimTranscript += transcript;
-            }
-        }
-        
-        // Add only NEW final results
-        if (finalTranscript.trim()) {
-            window.finalVoiceResult += finalTranscript;
-        }
-        
-        // Show current text
-        const currentText = window.finalVoiceResult + interimTranscript;
-        if (currentText.trim()) {
-            const statusText = document.querySelector('.status-text');
-            if (statusText) {
-                // Show first 50 chars of what's being said
-                const preview = currentText.trim().substring(0, 50);
-                statusText.textContent = `"${preview}${currentText.length > 50 ? '...' : ''}"`;
-            }
-        }
-    };
-
-    recognition.onerror = (event) => {
-        console.error('Recognition error:', event.error);
-        let errorMsg = texts.error;
-        
-        switch(event.error) {
-            case 'no-speech':
-                errorMsg = texts.noSpeech;
-                break;
-            case 'audio-capture':
-                errorMsg = texts.micError;
-                break;
-            case 'not-allowed':
-                errorMsg = texts.permissionDenied;
-                break;
-        }
-        
-        showRecordingError(errorMsg);
-        setTimeout(() => stopVoiceRecording(), 1500);
-    };
-
-    recognition.onend = () => {
-        // KEY: Restart if still recording
-        if (isRecording) {
-            try {
-                recognition.start();
-            } catch (error) {
-                console.log('Recognition restart failed:', error);
-                stopVoiceRecording();
-            }
-        }
-    };
-
     try {
+        // Show recording UI
+        const voiceRecording = document.getElementById('voiceRecording');
+        if (voiceRecording) {
+            voiceRecording.style.display = 'flex';
+        }
+        document.getElementById('inputContainer').style.display = 'none';
+        
+        // Update status
+        const statusText = document.querySelector('.status-text');
+        if (statusText) statusText.textContent = texts.recording;
+        
+        // Initialize recording
+        isRecording = true;
+        recordingStartTime = Date.now();
+        recordingTimer = setInterval(updateRecordingTimer, 100);
+        
+        // FIXED: Create a new instance each time
+        recognition = new SpeechRecognition();
+        
+        // FIXED: Set properties BEFORE starting
+        recognition.lang = currentLanguage;
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
+
+        // Initialize tracking variables
+        window.finalVoiceResult = '';
+        window.lastProcessedResultIndex = 0;
+
+        // Set up event handlers
+        recognition.onstart = () => {
+            console.log("Speech recognition started successfully");
+            const statusText = document.querySelector('.status-text');
+            if (statusText) statusText.textContent = texts.listening;
+        };
+
+        recognition.onresult = (event) => {
+            console.log("Speech recognition result received");
+            let finalTranscript = '';
+            let interimTranscript = '';
+            
+            try {
+                // Process only NEW results
+                for (let i = window.lastProcessedResultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript + ' ';
+                        window.lastProcessedResultIndex = i + 1;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+                
+                // Add only NEW final results
+                if (finalTranscript.trim()) {
+                    window.finalVoiceResult += finalTranscript;
+                }
+                
+                // Show current text
+                const currentText = window.finalVoiceResult + interimTranscript;
+                if (currentText.trim()) {
+                    const statusText = document.querySelector('.status-text');
+                    if (statusText) {
+                        // Show first 50 chars of what's being said
+                        const preview = currentText.trim().substring(0, 50);
+                        statusText.textContent = `"${preview}${currentText.length > 50 ? '...' : ''}"`;
+                    }
+                }
+            } catch (e) {
+                console.error("Error processing speech results:", e);
+            }
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech recognition error:", event.error);
+            
+            let errorMsg = texts.error;
+            switch(event.error) {
+                case 'no-speech':
+                    errorMsg = texts.noSpeech;
+                    break;
+                case 'audio-capture':
+                    errorMsg = texts.micError;
+                    break;
+                case 'not-allowed':
+                    errorMsg = texts.permissionDenied;
+                    break;
+                case 'service-not-allowed':
+                    errorMsg = "Speech recognition service not allowed. Please try again or use a different browser.";
+                    break;
+                case 'aborted':
+                    errorMsg = "Recording was aborted. Please try again.";
+                    break;
+                case 'network':
+                    errorMsg = "Network error. Please check your internet connection.";
+                    break;
+                default:
+                    errorMsg = "Error: " + event.error;
+            }
+            
+            showRecordingError(errorMsg);
+            
+            // Stop recording on error
+            setTimeout(() => stopVoiceRecording(), 1500);
+        };
+
+        recognition.onend = () => {
+            console.log("Speech recognition ended");
+            
+            // Only restart if still recording
+            if (isRecording) {
+                try {
+                    console.log("Restarting speech recognition");
+                    recognition.start();
+                } catch (error) {
+                    console.error("Failed to restart speech recognition:", error);
+                    showRecordingError("Failed to restart recording: " + error.message);
+                    stopVoiceRecording();
+                }
+            }
+        };
+
+        // FIXED: Start recognition with proper error handling
+        console.log("Starting speech recognition...");
         recognition.start();
+        console.log("Speech recognition started");
+        
     } catch (error) {
-        console.error('Failed to start:', error);
-        showRecordingError('Failed to start recording');
+        console.error("Failed to start speech recognition:", error);
+        showRecordingError("Failed to start recording: " + error.message);
         stopVoiceRecording();
     }
 }
 
+// FIXED: Stop Voice Recording function
 function stopVoiceRecording() {
-    if (!isRecording) return;
+    console.log("Stopping voice recording...");
+    
+    if (!isRecording) {
+        console.log("Not recording, nothing to stop");
+        return;
+    }
     
     isRecording = false;
     
@@ -5685,7 +5649,11 @@ function stopVoiceRecording() {
     if (voiceRecording) {
         voiceRecording.style.display = 'none';
     }
-    document.getElementById('inputContainer').style.display = 'flex';
+    
+    const inputContainer = document.getElementById('inputContainer');
+    if (inputContainer) {
+        inputContainer.style.display = 'flex';
+    }
     
     // Stop timer
     if (recordingTimer) {
@@ -5695,62 +5663,65 @@ function stopVoiceRecording() {
     
     // Stop recognition
     if (recognition) {
-        recognition.stop();
+        try {
+            recognition.stop();
+            console.log("Speech recognition stopped");
+        } catch (error) {
+            console.error("Error stopping recognition:", error);
+        }
         
         // Get final text
         const finalText = (window.finalVoiceResult || '').trim();
         if (finalText) {
+            console.log("Final text:", finalText);
+            
             // Put text in input
-            document.getElementById('chatInput').value = finalText;
-            document.getElementById('chatInput').focus();
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) {
+                chatInput.value = finalText;
+                chatInput.focus();
+            }
             
             // Show success
             showTranscriptSuccess(finalText);
-            
-            // Optional: Auto-send
-            // sendMessage();
+        } else {
+            console.log("No final text captured");
         }
     }
     
     // Reset everything
-    document.getElementById('recordingTimer').textContent = '00:00';
+    const timerElement = document.getElementById('recordingTimer');
+    if (timerElement) {
+        timerElement.textContent = '00:00';
+    }
+    
     const statusText = document.querySelector('.status-text');
-    if (statusText) statusText.textContent = 'Listening...';
+    if (statusText) {
+        statusText.textContent = 'Listening...';
+    }
+    
     window.finalVoiceResult = '';
     window.lastProcessedResultIndex = 0;
+    
+    console.log("Voice recording cleanup complete");
 }
 
+// FIXED: Update Recording Timer
 function updateRecordingTimer() {
+    if (!recordingStartTime) return;
+    
     const elapsed = Date.now() - recordingStartTime;
     const seconds = Math.floor(elapsed / 1000);
     const minutes = Math.floor(seconds / 60);
     const displaySeconds = seconds % 60;
-    document.getElementById('recordingTimer').textContent = 
-        `${minutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
-}
-
-
-// Enhanced Helper Functions
-function startRecordingTimer() {
-    recordingStartTime = Date.now();
-    recordingTimer = setInterval(() => {
-        const elapsed = Date.now() - recordingStartTime;
-        const minutes = Math.floor(elapsed / 60000);
-        const seconds = Math.floor((elapsed % 60000) / 1000);
-        const timerElement = document.getElementById('recordingTimer');
-        if (timerElement) {
-            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-    }, 100);
-}
-
-function stopRecordingTimer() {
-    if (recordingTimer) {
-        clearInterval(recordingTimer);
-        recordingTimer = null;
+    
+    const timerElement = document.getElementById('recordingTimer');
+    if (timerElement) {
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
     }
 }
 
+// FIXED: Update Recording Status
 function updateRecordingStatus(text, isActive) {
     const statusText = document.querySelector('.status-text');
     const statusDot = document.querySelector('.status-dot');
@@ -5761,6 +5732,7 @@ function updateRecordingStatus(text, isActive) {
     }
 }
 
+// FIXED: Show Recording Success
 function showRecordingSuccess() {
     const recordingCircle = document.querySelector('.recording-circle');
     if (recordingCircle) {
@@ -5773,7 +5745,10 @@ function showRecordingSuccess() {
     }
 }
 
+// FIXED: Show Recording Error
 function showRecordingError(message) {
+    console.error("Recording error:", message);
+    
     // Create error notification
     const errorDiv = document.createElement('div');
     errorDiv.style.cssText = `
@@ -5798,6 +5773,289 @@ function showRecordingError(message) {
         errorDiv.remove();
     }, 3000);
 }
+
+// FIXED: Show Transcript Success
+function showTranscriptSuccess(transcript) {
+    // Create success notification
+    const successDiv = document.createElement('div');
+    successDiv.style.cssText = `
+        position: fixed;
+        bottom: 150px;
+        right: 30px;
+        background: linear-gradient(135deg, #00C896, #2EE6D6);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 200, 150, 0.3);
+        z-index: 9999;
+        font-weight: 600;
+        max-width: 300px;
+        animation: slideInNotification 0.5s ease;
+    `;
+    successDiv.innerHTML = `
+        <div style="margin-bottom: 8px;">🎤 Speech recorded successfully!</div>
+        <div style="font-size: 12px; opacity: 0.9;">"${transcript.substring(0, 50)}${transcript.length > 50 ? '...' : ''}"</div>
+        <div style="font-size: 11px; margin-top: 8px; opacity: 0.8;">Review and click send when ready</div>
+    `;
+    document.body.appendChild(successDiv);
+    
+    setTimeout(() => {
+        successDiv.remove();
+    }, 4000);
+}
+
+// FIXED: Add animation styles if they don't exist
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.head.querySelector('style[data-recording-animations]')) {
+        const style = document.createElement('style');
+        style.setAttribute('data-recording-animations', 'true');
+        style.textContent = `
+            @keyframes fadeInRecording {
+                from { opacity: 0; transform: translate(-50%, -60%); }
+                to { opacity: 1; transform: translate(-50%, -50%); }
+            }
+            @keyframes slideInNotification {
+                from { opacity: 0; transform: translateX(100px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // Check browser compatibility
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        console.warn("This browser doesn't support speech recognition");
+        
+        // Hide microphone button if speech recognition isn't supported
+        const micButton = document.querySelector('.input-action-btn[onclick="toggleVoice()"]');
+        if (micButton) {
+            micButton.style.display = 'none';
+        }
+    } else {
+        console.log("Speech recognition is supported in this browser");
+    }  
+});
+
+// FIXED: Cancel Recording function
+function cancelRecording() {
+    console.log("Cancelling voice recording...");
+    stopVoiceRecording();
+}
+
+// FIXED: Set Language function
+function setLanguage(lang) {
+    console.log("Setting language to:", lang);
+    currentLanguage = lang;
+    
+    // Update placeholder text based on language
+    const placeholders = {
+        'en-US': 'Type your message or ask a question...',
+        'fr-FR': 'Tapez votre message ou posez une question...',
+        'es-ES': 'Escribe tu mensaje o haz una pregunta...',
+        'ar-MA': 'اكتب رسالتك أو اطرح سؤالاً...'
+    };
+    
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.placeholder = placeholders[lang] || placeholders['en-US'];
+    }
+    
+    // Update status text if recording overlay is visible
+    if (!isRecording) {
+        const statusText = document.querySelector('.status-text');
+        if (statusText) {
+            const texts = voiceInterfaceText[lang] || voiceInterfaceText['en-US'];
+            statusText.textContent = texts.listening;
+        }
+    }
+}
+
+// FIXED: Add a fallback method for browsers with issues
+function useAlternativeVoiceInput() {
+    // Create a modal with alternative options
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+    `;
+    
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 16px; padding: 30px; max-width: 500px; width: 90%; text-align: center;">
+            <h3 style="color: #333; margin-bottom: 20px;">Voice Input Options</h3>
+            <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                We're experiencing issues with our voice recognition service.
+                Please choose an alternative method:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <button onclick="requestMicrophonePermission(); this.parentNode.parentNode.parentNode.remove();" style="
+                    background: linear-gradient(135deg, #7C4DFF, #9575CD);
+                    color: white;
+                    border: none;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    font-weight: 600;
+                    cursor: pointer;
+                ">Try Voice Recognition Again</button>
+                
+                <a href="https://dictation.io/speech" target="_blank" style="
+                    background: linear-gradient(135deg, #2EE6D6, #00C896);
+                    color: white;
+                    border: none;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    text-decoration: none;
+                    display: inline-block;
+                ">Use External Dictation Tool</a>
+                
+                <button onclick="this.parentNode.parentNode.parentNode.remove();" style="
+                    background: rgba(0, 0, 0, 0.1);
+                    color: #666;
+                    border: none;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    font-weight: 600;
+                    cursor: pointer;
+                ">Cancel</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// FIXED: Add a function to check for common issues
+function checkForCommonIssues() {
+    // Check if in iframe
+    let isInIframe = false;
+    try {
+        isInIframe = window.self !== window.top;
+    } catch (e) {
+        isInIframe = true;
+    }
+    
+    if (isInIframe) {
+        return {
+            hasIssue: true,
+            message: "Voice recording may not work in embedded frames. Please try on our main website."
+        };
+    }
+    
+    // Check if in incognito/private mode (may affect permissions)
+    let isIncognito = false;
+    if (navigator.storage && navigator.storage.estimate) {
+        const quota = navigator.storage.estimate();
+        if (quota && quota.quota < 120000000) {
+            isIncognito = true;
+        }
+    }
+    
+    if (isIncognito) {
+        return {
+            hasIssue: true,
+            message: "Voice recording may have limited functionality in private/incognito mode."
+        };
+    }
+    
+    // Check if using HTTPS
+    if (window.location.protocol !== 'https:' && 
+        window.location.hostname !== 'localhost' && 
+        window.location.hostname !== '127.0.0.1') {
+        return {
+            hasIssue: true,
+            message: "Voice recording requires a secure connection (HTTPS)."
+        };
+    }
+    
+    return { hasIssue: false };
+}
+
+// FIXED: Enhanced toggleVoice function with issue checking
+function enhancedToggleVoice() {
+    // If already recording, just stop
+    if (isRecording) {
+        stopVoiceRecording();
+        return;
+    }
+    
+    // Check for common issues
+    const issueCheck = checkForCommonIssues();
+    if (issueCheck.hasIssue) {
+        showRecordingError(issueCheck.message);
+        return;
+    }
+    
+    // Start the recording process by requesting permission first
+    requestMicrophonePermission();
+}
+
+// FIXED: Add a function to handle service-not-allowed error specifically
+function handleServiceNotAllowedError() {
+    console.log("Handling service-not-allowed error");
+    
+    // Create a more helpful error with instructions
+    const errorDiv = document.createElement('div');
+    errorDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        color: #333;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        z-index: 10001;
+        text-align: center;
+        max-width: 90%;
+        width: 400px;
+    `;
+    
+    errorDiv.innerHTML = `
+        <div style="font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #FF3B30;">Speech Recognition Unavailable</div>
+        <div style="margin-bottom: 20px;">We're experiencing issues with our speech recognition service. Here are some things you can try:</div>
+        <div style="text-align: left; margin-bottom: 20px;">
+            <div style="margin-bottom: 10px;">1. Refresh the page and try again</div>
+            <div style="margin-bottom: 10px;">2. Check that your microphone is working</div>
+            <div style="margin-bottom: 10px;">3. Try using Chrome or Edge browser</div>
+            <div>4. Make sure you've allowed microphone access</div>
+        </div>
+        <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+            <button style="
+                background: linear-gradient(135deg, #7C4DFF, #9575CD);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+            " onclick="requestMicrophonePermission(); this.parentNode.parentNode.remove();">Try Again</button>
+            
+            <button style="
+                background: rgba(0, 0, 0, 0.1);
+                color: #666;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+            " onclick="this.parentNode.parentNode.remove()">Close</button>
+        </div>
+    `;
+    
+    document.body.appendChild(errorDiv);
+}
+
 
 function showTranscriptSuccess(transcript) {
     // Create success notification
