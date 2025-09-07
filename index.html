@@ -3652,9 +3652,10 @@ body { font-family:'Inter',sans-serif; background:#df1313; color:#FFF; overflow:
                         <div class="showcase-window">
                             <div class="showcase-header">
                                 <div class="chatbot-avatar">🤖</div>
+                                
                                 <div class="chatbot-status">
-                                    <h4>ForgeBot AI Assistant</h4>
-                                    <span>🟢 Live Demo - Watch Our AI in Action</span>
+                                    <h4>ForgeBot Pro Assistant</h4>
+                                    <span>🟢 Online</span>
                                 </div>
                             </div>
                             <div class="showcase-messages">
@@ -4409,40 +4410,69 @@ body { font-family:'Inter',sans-serif; background:#df1313; color:#FFF; overflow:
                         <a href="#" class="btn-secondary">Download Brochure</a>
                     </div>
                 </div>
+         
+
+
+
+
+
+
+
+
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="contactForm" onsubmit="return submitContactForm(event)">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Name *</label>
-                                <input type="text" id="name" class="form-control" required>
+                                <input type="text" id="name" name="name" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="company">Company *</label>
-                                <input type="text" id="company" class="form-control" required>
+                                <input type="text" id="company" name="company" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">Email *</label>
-                                <input type="email" id="email" class="form-control" required>
+                                <input type="email" id="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="tel" id="phone" class="form-control">
+                                <input type="tel" id="phone" name="phone" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="project">Project Details *</label>
-                            <textarea id="project" class="form-control" required placeholder="Tell us about your project requirements..."></textarea>
+                            <textarea id="project" name="project" class="form-control" required placeholder="Tell us about your project requirements..."></textarea>
                         </div>
-                        <button type="submit" class="btn-primary" style="width: 100%;">
-                            Send Message
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        
+                        <!-- Add this checkbox for consent -->
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label class="checkbox-container" style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="consent" name="consent" required style="margin-top: 3px;">
+                                <span style="font-size: 14px; color: #666;">I consent to ForgeItOps processing my data to contact me about my request. *</span>
+                            </label>
+                        </div>
+                        
+                        <!-- Form status message area -->
+                        <div id="formStatus" style="margin: 15px 0; padding: 10px; border-radius: 8px; display: none;"></div>
+                        
+                        <button type="submit" id="submitButton" class="btn-primary" style="width: 100%; position: relative;">
+                            <span>Send Message</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;">
                                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                             </svg>
+                            <span id="submitSpinner" style="display: none; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+                                    <circle cx="12" cy="12" r="10" stroke-opacity="0.3" stroke-width="4"></circle>
+                                    <path d="M12 2C6.48 2 2 6.48 2 12"></path>
+                                </svg>
+                            </span>
                         </button>
                     </form>
                 </div>
+
+                
             </div>
         </div>
     </section>
@@ -4512,55 +4542,121 @@ body { font-family:'Inter',sans-serif; background:#df1313; color:#FFF; overflow:
         </div>
         
         <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <div class="chatbot-header-info">
-                    <div class="chatbot-avatar">
-                        <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#7C4DFF;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#2EE6D6;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M 25 60 Q 25 50, 35 50 Q 35 40, 50 40 Q 65 40, 65 50 Q 75 50, 75 60 Q 75 70, 65 70 L 35 70 Q 25 70, 25 60" 
-                                  fill="url(#avatarGrad)" opacity="0.9"/>
-                            <circle cx="40" cy="55" r="3" fill="white"/>
-                            <circle cx="60" cy="55" r="3" fill="white"/>
-                            <path d="M 40 62 Q 50 67, 60 62" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-                        </svg>
-                        <div class="avatar-status"></div>
-                    </div>
-                    <div class="chatbot-status">
-                        <h4>ForgeBot Pro Assistant</h4>
-                        <span>
-                            🟢 Online 
-                            <span class="typing-animation">
-                                <span class="typing-dot-small"></span>
-                                <span class="typing-dot-small"></span>
-                                <span class="typing-dot-small"></span>
-                            </span>
-                            AI Ready
-                        </span>
-                    </div>
-                </div>
-                <div class="chatbot-actions">
-                                        <button class="action-btn" onclick="minimizeChatbot()" title="Minimize">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 13H5v-2h14v2z"/>
-                        </svg>
-                    </button>
-                    <button class="action-btn" onclick="downloadChat()" title="Download Chat">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                        </svg>
-                    </button>
-                    <button class="action-btn chatbot-close" onclick="toggleChatbot()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+         <!-- Find your chatbot-header div and add this complete section -->
+<div class="chatbot-header">
+    <div class="chatbot-header-info">
+
+        <div class="chatbot-avatar">
+            <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7C4DFF;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#2EE6D6;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M 25 60 Q 25 50, 35 50 Q 35 40, 50 40 Q 65 40, 65 50 Q 75 50, 75 60 Q 75 70, 65 70 L 35 70 Q 25 70, 25 60" 
+                      fill="url(#avatarGrad)" opacity="0.9"/>
+                <circle cx="40" cy="55" r="3" fill="white"/>
+                <circle cx="60" cy="55" r="3" fill="white"/>
+                <path d="M 40 62 Q 50 67, 60 62" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="avatar-status"></div>
+        </div>
+        
+        <div class="chatbot-status">
+            <h4>ForgeBot Pro Assistant</h4>
+            <span>🟢 Online</span>
+        </div>
+    </div>
+    <div class="chatbot-actions">
+        <!-- Language Button -->
+        <button class="action-btn" id="langBtn" onclick="toggleLanguageMenu()" title="Select Language">
+            🌐
+        </button>
+        <!-- Your other buttons -->
+        <button class="action-btn" onclick="minimizeChatbot()" title="Minimize">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 13H5v-2h14v2z"/>
+            </svg>
+        </button>
+        <button class="action-btn chatbot-close" onclick="toggleChatbot()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<!-- ADD THIS LANGUAGE MENU RIGHT AFTER THE HEADER (inside chatbot-window) -->
+<div id="languageDropdown" style="
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 60px;
+    background: linear-gradient(135deg, #1a1a2e, #0f0f1e);
+    border: 2px solid rgba(124, 77, 255, 0.5);
+    border-radius: 12px;
+    padding: 8px;
+    z-index: 999999;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    min-width: 160px;
+">
+    <div class="lang-option" onclick="changeLanguage('en-US')" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        color: white;
+        transition: background 0.2s;
+    " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='transparent'">
+        <span style="font-size: 20px;">🇺🇸</span>
+        <span style="font-size: 14px;">English</span>
+    </div>
+    
+    <div class="lang-option" onclick="changeLanguage('fr-FR')" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        color: white;
+        transition: background 0.2s;
+    " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='transparent'">
+        <span style="font-size: 20px;">🇫🇷</span>
+        <span style="font-size: 14px;">Français</span>
+    </div>
+    
+    <div class="lang-option" onclick="changeLanguage('es-ES')" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        color: white;
+        transition: background 0.2s;
+    " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='transparent'">
+        <span style="font-size: 20px;">🇪🇸</span>
+        <span style="font-size: 14px;">Español</span>
+    </div>
+    
+    <div class="lang-option" onclick="changeLanguage('ar-MA')" style="
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        color: white;
+        transition: background 0.2s;
+    " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='transparent'">
+        <span style="font-size: 20px;">🇲🇦</span>
+        <span style="font-size: 14px;">العربية</span>
+    </div>
+</div>
             
             <div class="chatbot-messages" id="chatMessages">
                 <div class="date-divider">
@@ -4617,8 +4713,7 @@ body { font-family:'Inter',sans-serif; background:#df1313; color:#FFF; overflow:
         <div class="pulse-ring pulse-ring-3"></div>
         
         <!-- Main Recording Circle -->
-        <div class="recording-circle">
-            <div class="recording-icon">
+        <div class="recording-circle" onclick="stopVoiceRecording()">            <div class="recording-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
                 </svg>
@@ -4665,7 +4760,96 @@ body { font-family:'Inter',sans-serif; background:#df1313; color:#FFF; overflow:
                                 <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
                             </svg>
                         </button>
+
+                        <button class="action-btn" onclick="toggleLanguageMenu()" title="Select Language">
+                            🌐
+                        </button>
                     </div>
+
+                    <div id="languageMenu" style="
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, #1a1a2e, #0f0f1e);
+    border: 1px solid rgba(124, 77, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+        <button onclick="selectLanguage('en-US')" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 150px;
+        " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='rgba(124, 77, 255, 0.1)'">
+            <span>🇺🇸</span>
+            <span>English</span>
+        </button>
+        
+        <button onclick="selectLanguage('fr-FR')" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 150px;
+        " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='rgba(124, 77, 255, 0.1)'">
+            <span>🇫🇷</span>
+            <span>Français</span>
+        </button>
+        
+        <button onclick="selectLanguage('es-ES')" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 150px;
+        " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='rgba(124, 77, 255, 0.1)'">
+            <span>🇪🇸</span>
+            <span>Español</span>
+        </button>
+        
+        <button onclick="selectLanguage('ar-MA')" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(124, 77, 255, 0.1);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 150px;
+        " onmouseover="this.style.background='rgba(124, 77, 255, 0.3)'" onmouseout="this.style.background='rgba(124, 77, 255, 0.1)'">
+            <span>🇲🇦</span>
+            <span>العربية</span>
+        </button>
+    </div>
+</div>
+
+
                     <input 
                         type="text" 
                         class="chat-input" 
@@ -4691,6 +4875,8 @@ body { font-family:'Inter',sans-serif; background:#df1313; color:#FFF; overflow:
 
 
     <script>
+
+
 
 
 
@@ -4725,6 +4911,15 @@ window.addEventListener('load', () => {
     document.body.style.overflow = 'auto';
   }, { once: true });
 
+
+
+
+
+
+
+
+
+  
         // Particle Effect
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -4742,7 +4937,158 @@ window.addEventListener('load', () => {
         createParticles();
 
 
+
+
+
         
+        
+// Working toggle function
+function toggleLanguageMenu() {
+    console.log('Toggle language menu clicked');
+    const dropdown = document.getElementById('languageDropdown');
+    
+    if (!dropdown) {
+        console.error('Language dropdown not found!');
+        return;
+    }
+    
+    // Toggle display
+    if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+        dropdown.style.display = 'block';
+        console.log('Language menu opened');
+        
+        // Make sure it's on top
+        dropdown.style.zIndex = '999999';
+        
+        // Add click outside listener
+        setTimeout(() => {
+            document.addEventListener('click', closeLangMenuOnClickOutside);
+        }, 100);
+    } else {
+        dropdown.style.display = 'none';
+        console.log('Language menu closed');
+        document.removeEventListener('click', closeLangMenuOnClickOutside);
+    }
+}
+
+// Close menu when clicking outside
+function closeLangMenuOnClickOutside(e) {
+    const dropdown = document.getElementById('languageDropdown');
+    const langBtn = document.getElementById('langBtn');
+    
+    if (dropdown && !dropdown.contains(e.target) && e.target !== langBtn) {
+        dropdown.style.display = 'none';
+        document.removeEventListener('click', closeLangMenuOnClickOutside);
+    }
+}
+
+// Change language function
+function changeLanguage(lang) {
+    console.log('Language changing to:', lang);
+    
+    // Set the current language
+    currentLanguage = lang;
+    
+    // Update placeholder
+    const placeholders = {
+        'en-US': 'Type your message or ask a question...',
+        'fr-FR': 'Tapez votre message ou posez une question...',
+        'es-ES': 'Escribe tu mensaje o haz una pregunta...',
+        'ar-MA': 'اكتب رسالتك أو اطرح سؤالاً...'
+    };
+    
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.placeholder = placeholders[lang] || placeholders['en-US'];
+    }
+    
+    // Update recording status if exists
+    const statusText = document.querySelector('.status-text');
+    if (statusText && !isRecording) {
+        const texts = voiceInterfaceText[lang] || voiceInterfaceText['en-US'];
+        statusText.textContent = texts.listening;
+    }
+    
+    // Close dropdown
+    document.getElementById('languageDropdown').style.display = 'none';
+    
+    // Show notification
+    showLanguageNotification(lang);
+}
+
+// Show language change notification
+function showLanguageNotification(lang) {
+    const langNames = {
+        'en-US': 'English',
+        'fr-FR': 'Français',
+        'es-ES': 'Español',
+        'ar-MA': 'العربية'
+    };
+    
+    // Remove any existing notification
+    const existing = document.getElementById('langNotification');
+    if (existing) existing.remove();
+    
+    const notification = document.createElement('div');
+    notification.id = 'langNotification';
+    notification.style.cssText = `
+        position: fixed;
+        bottom: 160px;
+        right: 40px;
+        background: linear-gradient(135deg, #7C4DFF, #2EE6D6);
+        color: white;
+        padding: 14px 24px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(124, 77, 255, 0.4);
+        z-index: 999999;
+        font-weight: 600;
+        font-size: 14px;
+        animation: slideInRight 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    `;
+    
+    notification.innerHTML = `
+        <span>🌐</span>
+        <span>Language: ${langNames[lang]}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Add animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    `;
+    if (!document.head.querySelector('style[data-lang-animation]')) {
+        style.setAttribute('data-lang-animation', 'true');
+        document.head.appendChild(style);
+    }
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+
+
+
+
+
+
+
+
+
         // Tab switching for use cases
         function showUseCase(caseId) {
             const tabs = document.querySelectorAll('.tab-btn');
@@ -4757,7 +5103,6 @@ window.addEventListener('load', () => {
 
         // Ultra Premium Chatbot Functions
         let chatbotOpen = false;
-        let isRecording = false;
         let messageCount = 0;
 
         // Enhanced attention-grabbing functionality
@@ -5052,6 +5397,53 @@ function downloadChat() {
 
 
 
+// Voice Recording Core Variables
+let isRecording = false;
+let recognition = null;
+let currentLanguage = 'en-US';
+
+// Language Support
+const voiceInterfaceText = {
+    'en-US': {
+        recording: 'Recording...',
+        listening: 'Listening...',
+        processing: 'Processing...',
+        noSpeech: 'No speech detected',
+        micError: 'Microphone not accessible',
+        permissionDenied: 'Permission denied',
+        error: 'Error'
+    },
+    'fr-FR': {
+        recording: 'Enregistrement...',
+        listening: 'En écoute...',
+        processing: 'Traitement...',
+        noSpeech: 'Aucune voix détectée',
+        micError: 'Microphone inaccessible',
+        permissionDenied: 'Permission refusée',
+        error: 'Erreur'
+    },
+    'es-ES': {
+        recording: 'Grabando...',
+        listening: 'Escuchando...',
+        processing: 'Procesando...',
+        noSpeech: 'No se detectó voz',
+        micError: 'Micrófono no accesible',
+        permissionDenied: 'Permiso denegado',
+        error: 'Error'
+    },
+    'ar-MA': {
+        recording: 'تسجيل...',
+        listening: 'جاري الاستماع...',
+        processing: 'جاري المعالجة...',
+        noSpeech: 'لم يتم اكتشاف صوت',
+        micError: 'لا يمكن الوصول للميكروفون',
+        permissionDenied: 'تم رفض الإذن',
+        error: 'خطأ'
+    }
+};
+
+
+
 // Enhanced Voice Recording Variables
 let recordingTimer = null;
 let recordingStartTime = null;
@@ -5085,6 +5477,12 @@ function toggleVoice() {
             micButton.style.transform = 'scale(1.1)';
         }
         
+    if (isRecording) {
+        stopVoiceRecording();
+    } else {
+        startVoiceRecording();
+    }
+
         // Start timer
         startRecordingTimer();
         
@@ -5157,6 +5555,180 @@ function toggleVoice() {
         }
     }
 }
+
+
+
+
+function startVoiceRecording() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+        showRecordingError('Voice recognition not supported in your browser.');
+        return;
+    }
+
+    const texts = voiceInterfaceText[currentLanguage] || voiceInterfaceText['en-US'];
+    
+    // Show recording UI
+    const voiceRecording = document.getElementById('voiceRecording');
+    if (voiceRecording) {
+        voiceRecording.style.display = 'flex';
+    }
+    document.getElementById('inputContainer').style.display = 'none';
+    
+    // Update status
+    const statusText = document.querySelector('.status-text');
+    if (statusText) statusText.textContent = texts.recording;
+    
+    // Initialize recording
+    isRecording = true;
+    recordingStartTime = Date.now();
+    recordingTimer = setInterval(updateRecordingTimer, 100);
+    
+    // Setup speech recognition with REFERENCE LOGIC
+    recognition = new SpeechRecognition();
+    recognition.lang = currentLanguage;
+    recognition.continuous = true;  // KEY: Don't stop on silence
+    recognition.interimResults = true;  // KEY: Show partial results
+    recognition.maxAlternatives = 1;
+
+    // Initialize tracking (CRITICAL FROM REFERENCE)
+    window.finalVoiceResult = '';
+    window.lastProcessedResultIndex = 0;
+
+    recognition.onstart = () => {
+        const statusText = document.querySelector('.status-text');
+        if (statusText) statusText.textContent = texts.listening;
+    };
+
+    // REFERENCE LOGIC: Proper result handling
+    recognition.onresult = (event) => {
+        let finalTranscript = '';
+        let interimTranscript = '';
+        
+        // Only process NEW results
+        for (let i = window.lastProcessedResultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalTranscript += transcript + ' ';
+                window.lastProcessedResultIndex = i + 1;
+            } else {
+                interimTranscript += transcript;
+            }
+        }
+        
+        // Add only NEW final results
+        if (finalTranscript.trim()) {
+            window.finalVoiceResult += finalTranscript;
+        }
+        
+        // Show current text
+        const currentText = window.finalVoiceResult + interimTranscript;
+        if (currentText.trim()) {
+            const statusText = document.querySelector('.status-text');
+            if (statusText) {
+                // Show first 50 chars of what's being said
+                const preview = currentText.trim().substring(0, 50);
+                statusText.textContent = `"${preview}${currentText.length > 50 ? '...' : ''}"`;
+            }
+        }
+    };
+
+    recognition.onerror = (event) => {
+        console.error('Recognition error:', event.error);
+        let errorMsg = texts.error;
+        
+        switch(event.error) {
+            case 'no-speech':
+                errorMsg = texts.noSpeech;
+                break;
+            case 'audio-capture':
+                errorMsg = texts.micError;
+                break;
+            case 'not-allowed':
+                errorMsg = texts.permissionDenied;
+                break;
+        }
+        
+        showRecordingError(errorMsg);
+        setTimeout(() => stopVoiceRecording(), 1500);
+    };
+
+    recognition.onend = () => {
+        // KEY: Restart if still recording
+        if (isRecording) {
+            try {
+                recognition.start();
+            } catch (error) {
+                console.log('Recognition restart failed:', error);
+                stopVoiceRecording();
+            }
+        }
+    };
+
+    try {
+        recognition.start();
+    } catch (error) {
+        console.error('Failed to start:', error);
+        showRecordingError('Failed to start recording');
+        stopVoiceRecording();
+    }
+}
+
+function stopVoiceRecording() {
+    if (!isRecording) return;
+    
+    isRecording = false;
+    
+    // Hide recording UI
+    const voiceRecording = document.getElementById('voiceRecording');
+    if (voiceRecording) {
+        voiceRecording.style.display = 'none';
+    }
+    document.getElementById('inputContainer').style.display = 'flex';
+    
+    // Stop timer
+    if (recordingTimer) {
+        clearInterval(recordingTimer);
+        recordingTimer = null;
+    }
+    
+    // Stop recognition
+    if (recognition) {
+        recognition.stop();
+        
+        // Get final text
+        const finalText = (window.finalVoiceResult || '').trim();
+        if (finalText) {
+            // Put text in input
+            document.getElementById('chatInput').value = finalText;
+            document.getElementById('chatInput').focus();
+            
+            // Show success
+            showTranscriptSuccess(finalText);
+            
+            // Optional: Auto-send
+            // sendMessage();
+        }
+    }
+    
+    // Reset everything
+    document.getElementById('recordingTimer').textContent = '00:00';
+    const statusText = document.querySelector('.status-text');
+    if (statusText) statusText.textContent = 'Listening...';
+    window.finalVoiceResult = '';
+    window.lastProcessedResultIndex = 0;
+}
+
+function updateRecordingTimer() {
+    const elapsed = Date.now() - recordingStartTime;
+    const seconds = Math.floor(elapsed / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const displaySeconds = seconds % 60;
+    document.getElementById('recordingTimer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
+}
+
 
 // Enhanced Helper Functions
 function startRecordingTimer() {
@@ -5257,11 +5829,24 @@ function showTranscriptSuccess(transcript) {
 }
 
 function cancelRecording() {
-    if (window.isRecording) {
-        toggleVoice();
-    }
+    stopVoiceRecording();
 }
 
+
+function setLanguage(lang) {
+    currentLanguage = lang;
+    console.log('Language set to:', lang);
+    
+    // Update placeholder
+    const placeholders = {
+        'en-US': 'Type your message or ask a question...',
+        'fr-FR': 'Tapez votre message...',
+        'es-ES': 'Escribe tu mensaje...',
+        'ar-MA': 'اكتب رسالتك...'
+    };
+    
+    document.getElementById('chatInput').placeholder = placeholders[lang] || placeholders['en-US'];
+}
 
 // Add this new function to show a success indicator
 function addRecordingSuccessIndicator() {
@@ -6007,8 +6592,97 @@ function getSmartResponse(message) {
                 playNotificationSound();
             }
         });
-    </script>
 
+
+
+
+
+
+
+
+
+
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+
+    // Your form submission code
+    function submitContactForm(event) {
+        event.preventDefault();
+        
+        // Show loading spinner
+        document.getElementById('submitSpinner').style.display = 'inline-block';
+        document.getElementById('submitButton').disabled = true;
+        
+        // Get form data
+        const form = document.getElementById('contactForm');
+        const name = document.getElementById('name').value;
+        const company = document.getElementById('company').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value || 'Not provided';
+        const project = document.getElementById('project').value;
+        
+        // Initialize EmailJS with your user ID (sign up at emailjs.com)
+        emailjs.init("rk_2ozmna5AeXA6yk");
+        
+        const templateParams = {
+            name: name,
+            company: company,
+            email: email,
+            phone: phone,
+            message: project
+        };
+        
+        // Send the email (replace with your service ID and template ID)
+        emailjs.send('service_kz98u48', 'template_ef332gz', templateParams)
+            .then(function() {
+                // Send WhatsApp notification
+                sendWhatsAppNotification(name, company, email, phone, project);
+                
+                // Show success message
+                const statusDiv = document.getElementById('formStatus');
+                statusDiv.style.display = 'block';
+                statusDiv.style.backgroundColor = '#e8f5e9';
+                statusDiv.style.color = '#2e7d32';
+                statusDiv.textContent = 'Thank you! Your message has been sent successfully.';
+                
+                // Reset form
+                form.reset();
+            }, function(error) {
+                // Show error message
+                const statusDiv = document.getElementById('formStatus');
+                statusDiv.style.display = 'block';
+                statusDiv.style.backgroundColor = '#ffebee';
+                statusDiv.style.color = '#c62828';
+                statusDiv.textContent = 'Oops! Something went wrong. Please try again or contact us directly.';
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                // Hide loading spinner
+                document.getElementById('submitSpinner').style.display = 'none';
+                document.getElementById('submitButton').disabled = false;
+            });
+        
+        return false;
+    }
+
+    // Function to send WhatsApp notification
+    function sendWhatsAppNotification(name, company, email, phone, project) {
+        // Format the message
+        const whatsappNumber = '212640036156'; // Your number without +
+        const message = `New website inquiry:
+Name: ${name}
+Company: ${company}
+Email: ${email}
+Phone: ${phone}
+Project: ${project}`;
+        
+        // Direct WhatsApp link - this will open WhatsApp with a pre-filled message
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`, '_blank');
+    }
+
+    </script>
 
 <script>
     // Mobile Menu Toggle
